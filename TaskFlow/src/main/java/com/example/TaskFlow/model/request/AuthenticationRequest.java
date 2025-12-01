@@ -7,7 +7,7 @@ import lombok.Data;
 @Schema(description = "로그인 요청 정보")
 public class AuthenticationRequest {
     @Schema(description = "로그인 아이디")
-    private String id;
+    private String loginId;
     @Schema(description = "로그인 비밀번호")
     private String password;
 }

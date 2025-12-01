@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping(PathConf.API)
-@Tag(name = "계정 관련 API", description = PathConf.LOGIN)
 public class AccountController {
     public static String DASHBOARD_URL = "";
 
