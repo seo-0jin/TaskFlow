@@ -9,7 +9,9 @@ public enum ErrorCode {
     INVALID_TOKEN("4010300001", "Invalid token."),
     FORBIDDEN("4030000001", "Access denied."),
     LOGIN_FAILED("4010300002", "Invalid ID or password."),
-    USER_NOT_FOUND("4040100001", "User not found.");
+    USER_NOT_FOUND("4040100001", "User not found."),
+    DUPLICATED_LOGIN_ID("4000100001", "Duplicated login ID."),
+    SIGNUP_FAILED("5000100001", "Signup process failed.");
 
     private final String code;
     private final String message;

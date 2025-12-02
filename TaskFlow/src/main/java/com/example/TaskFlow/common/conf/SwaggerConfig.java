@@ -22,7 +22,7 @@ public class SwaggerConfig {
     public GroupedOpenApi taskApi() {
         return GroupedOpenApi.builder()
                 .group("taskapi")
-                .pathsToMatch("/taskapi/**")   // 예: /taskapi/** 아래 API만 이 그룹으로
+                .pathsToMatch("/api/**")   // 예: /api/** 아래 API만 이 그룹으로
                 .build();
     }
 }

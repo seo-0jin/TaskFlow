@@ -3,6 +3,7 @@ package com.example.TaskFlow.controller;
 import com.example.TaskFlow.common.conf.PathConf;
 import com.example.TaskFlow.define.TaskDefine;
 import com.example.TaskFlow.model.request.AuthenticationRequest;
+import com.example.TaskFlow.model.request.SignUpRequest;
 import com.example.TaskFlow.model.response.account.LoginResponse;
 import com.example.TaskFlow.model.response.common.ApiResponse;
 import com.example.TaskFlow.service.AccountService;
@@ -14,10 +15,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -32,7 +30,7 @@ public class AccountController {
         this.DASHBOARD_URL = TaskDefine.DASHBOARD_URL;
     }
 
-    @Operation(summary = "관리자용 로그인", description = "관리자용 SDK 로그인. ID/PW를 입력하여 인증한다.")
+    @Operation(summary = "로그인", description = "로그인. ID/PW를 입력하여 인증한다.")
     @RequestMapping(value = PathConf.LOGIN, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ApiResponse<Object>> login(HttpServletRequest request,
                                                      @RequestBody
@@ -54,6 +52,27 @@ public class AccountController {
             );
 
             return ApiResponseUtil.ok(DASHBOARD_URL);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Operation(summary = "아이디 중복 검사", description = "아이디 중복 검사")
+    @RequestMapping(value = PathConf.CHECK_LOGIN_ID, method = RequestMethod.GET)
+    public ResponseEntity<?> checkLoginId(@RequestParam String loginId) {
+        boolean exists = accountService.existsByLoginId(loginId);
+
+        return ApiResponseUtil.ok(exists);
+    }
+
+    @Operation(summary = "회원가입", description = "회원가입")
+    @RequestMapping(value = PathConf.SIGNUP, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ApiResponse<Object>> signUp(
+            @RequestBody
+            SignUpRequest signUpRequest) {
+        try {
+            accountService.signUp(signUpRequest);
+            return ApiResponseUtil.ok("회원가입이 완료되었습니다.");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
