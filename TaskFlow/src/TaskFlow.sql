@@ -133,11 +133,21 @@ ALTER TABLE activity_logs
 
 
 -- 8. 유용한 인덱스들 (조회 성능용)
-CREATE INDEX idx_tickets_project ON tickets(project_id);
-CREATE INDEX idx_tickets_assignee ON tickets(assignee_id);
-CREATE INDEX idx_tickets_status ON tickets(status);
-CREATE INDEX idx_tickets_priority ON tickets(priority);
-CREATE INDEX idx_tickets_due_date ON tickets(due_date);
+CREATE INDEX idx_work_requests_project
+    ON work_requests(project_id);
+
+CREATE INDEX idx_work_requests_assignee
+    ON work_requests(assignee_id);
+
+CREATE INDEX idx_work_requests_status
+    ON work_requests(status);
+
+CREATE INDEX idx_work_requests_priority
+    ON work_requests(priority);
+
+CREATE INDEX idx_work_requests_due_date
+    ON work_requests(due_date);
+
 
 CREATE INDEX idx_projects_owner ON projects(owner_id);
 CREATE INDEX idx_activity_logs_user ON activity_logs(user_id);
@@ -160,5 +170,24 @@ VALUES (
     'ACTIVE'
 );
 
+CREATE TABLE positions (
+    position_code   VARCHAR(20) PRIMARY KEY,   -- 'J1', 'J2', 'J3' ...
+    name_ko         VARCHAR(50) NOT NULL,      -- '사원', '대리', '과장' ...
+    level           INT NOT NULL,              -- 높을수록 상위 직급
+    description     VARCHAR(255),
+    created_at      TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+);
 
+ALTER TABLE users
+    ADD COLUMN position_code VARCHAR(20);
 
+ALTER TABLE users
+    ADD CONSTRAINT fk_users_position
+        FOREIGN KEY (position_code) REFERENCES positions(position_code);
+
+INSERT INTO positions(position_code, name_ko, level, description) VALUES
+('J1', '사원', 1, '일반 직원'),
+('J2', '대리', 2, '실무 담당'),
+('J3', '과장', 3, '팀 리드 보조'),
+('J4', '차장', 4, '팀 리드'),
+('J5', '부장', 5, '부서장');
