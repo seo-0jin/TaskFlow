@@ -1,9 +1,8 @@
 // src/router/AppRouter.tsx
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import LoginPage from "../pages/LoginPage";
-// import DashboardPage from "../pages/DashboardPage";
 import { useAuth } from "../hooks/useAuth";
 import { RoutePath } from "../const/RoutePath";
+import LoginPage from "../pages/LoginPage";
 import SignUpPage from "../pages/SignUpPage";
 
 export default function AppRouter() {
@@ -19,13 +18,12 @@ export default function AppRouter() {
         {/* 로그인 페이지 */}
         <Route
           path={RoutePath.LOGIN}
-          element={user ? <Navigate to={RoutePath.DASHBOARD} replace /> : <LoginPage />}
+          element={
+            user ? <Navigate to={RoutePath.DASHBOARD} replace /> : <LoginPage />
+          }
         />
         {/* 회원가입 페이지 */}
-        <Route
-          path={RoutePath.SIGNUP}
-          element={user ? <Navigate to={RoutePath.LOGIN} replace /> : <SignUpPage />}
-        />
+        <Route path={RoutePath.SIGNUP} element={<SignUpPage />} />
 
         {/* 보호된 페이지 (로그인 필요) */}
         {/* <Route
