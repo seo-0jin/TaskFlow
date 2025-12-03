@@ -51,7 +51,7 @@ export const useLoginViewModel = (): LoginViewModel => {
                 token: res.token,
             };
 
-            saveUser(user);
+            saveUser(user); // sessionStorage 저장
 
             setState(prev => ({ ...prev, loading: false }));
             return user;
