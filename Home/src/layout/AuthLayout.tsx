@@ -5,7 +5,7 @@ interface AuthLayoutProps {
   children: ReactNode;
 }
 
-const  AuthLayout = ({ children }: AuthLayoutProps) =>  {
+const AuthLayout = ({ children }: AuthLayoutProps) => {
   return (
     <div
       style={{
@@ -29,6 +29,6 @@ const  AuthLayout = ({ children }: AuthLayoutProps) =>  {
       </div>
     </div>
   );
-}
+};
 
-export default AuthLayout
+export default AuthLayout;

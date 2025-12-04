@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { LoginResponse } from "../data/response/LoginResponse";
 import type { LoginRequest } from "../data/request/LoginRequest";
 import { loginService } from "../service/LoginService";
-import { saveUser } from "../utils/AuthStorage";
+import { useAuthStore } from "../store/useAuthStore";
 
 export interface LoginFormState {
     loginId: string;
@@ -26,6 +26,8 @@ export const useLoginViewModel = (): LoginViewModel => {
         error: null,
     });
 
+    const login = useAuthStore((s) => s.login);
+
     const setLoginId = (value: string) => {
         setState(prev => ({ ...prev, loginId: value }));
     };
@@ -48,10 +50,12 @@ export const useLoginViewModel = (): LoginViewModel => {
                 loginId: res.loginId,
                 name: res.name,
                 roleCode: res.roleCode,
+                phone: res.phone,
                 token: res.token,
             };
 
-            saveUser(user); // sessionStorage 저장
+            // Zustand store에 로그인 저장 (전역 상태 + sessionStorage 저장됨)
+            login(user);
 
             setState(prev => ({ ...prev, loading: false }));
             return user;

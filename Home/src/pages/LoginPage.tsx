@@ -1,6 +1,6 @@
 import type { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLoginViewModel } from "../viewmodels/userLoginViewModel";
+import { useLoginViewModel } from "../viewmodels/useLoginViewModel";
 import AuthLayout from "../layout/AuthLayout";
 
 const LoginPage = () => {

@@ -1,7 +1,7 @@
 import type { LoginResponse } from "../data/response/LoginResponse";
 
-const USER_KEY = "taskflow_user";
-const TOKEN_KEY = "taskflow_token";
+const USER_KEY = "user";
+const TOKEN_KEY = "token";
 
 export const saveUser = (user: LoginResponse) => {
   sessionStorage.setItem(USER_KEY, JSON.stringify(user));
@@ -16,6 +16,11 @@ export const loadUser = (): LoginResponse | null => {
   } catch {
     return null;
   }
+}
+
+export const loadToken = (): string | null => {
+  const savedToken = sessionStorage.getItem(TOKEN_KEY);
+  return savedToken ?? null;
 }
 
 export const clearUser = () => {

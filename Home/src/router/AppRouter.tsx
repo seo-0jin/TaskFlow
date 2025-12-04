@@ -4,6 +4,8 @@ import { useAuth } from "../hooks/useAuth";
 import { RoutePath } from "../const/RoutePath";
 import LoginPage from "../pages/LoginPage";
 import SignUpPage from "../pages/SignUpPage";
+import PrivateRoute from "./PrivateRoute";
+import DashBoardPage from "../pages/DashBoardPage";
 
 export default function AppRouter() {
   const { user, loading } = useAuth();
@@ -16,24 +18,37 @@ export default function AppRouter() {
     <BrowserRouter>
       <Routes>
         {/* 로그인 페이지 */}
-        <Route
-          path={RoutePath.LOGIN}
-          element={
-            user ? <Navigate to={RoutePath.DASHBOARD} replace /> : <LoginPage />
-          }
-        />
+        <Route path={RoutePath.LOGIN} element={<LoginPage />} />
         {/* 회원가입 페이지 */}
         <Route path={RoutePath.SIGNUP} element={<SignUpPage />} />
 
         {/* 보호된 페이지 (로그인 필요) */}
+        {/* 대시보드 */}
+        <Route
+          path={RoutePath.DASHBOARD}
+          element={
+            <PrivateRoute>
+              <DashBoardPage />
+            </PrivateRoute>
+          }
+        />
+        {/* ADMIN만 접근 가능한 예시 */}
         {/* <Route
-          path="/dashboard"
-          element={user ? <DashboardPage /> : <Navigate to="/login" replace />}
+          path={RoutePath.ADMIN}
+          element={
+            <PrivateRoute roles={["ADMIN"]}>
+              <AdminPage />
+            </PrivateRoute>
+          }
         /> */}
         {/* 기본 루트 처리 */}
         <Route
           path="*"
-          element={<Navigate to={user ? "/dashboard" : "/login"} replace />}
+          element={
+            <PrivateRoute>
+              <LoginPage />
+            </PrivateRoute>
+          }
         />
       </Routes>
     </BrowserRouter>
