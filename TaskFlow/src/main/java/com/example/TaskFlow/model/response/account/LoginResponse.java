@@ -9,6 +9,10 @@ import lombok.EqualsAndHashCode;
 @Schema(description = "로그인 정보 응답")
 @Data
 public class LoginResponse extends TaskAccountResponse{
+    @Schema(description = "JWT 인증 토큰")
+    @JsonProperty("token")
+    private String token;
+
     @Schema(description = "세션 UUID")
     @JsonProperty("session_id")
     private String sessionId;

@@ -2,6 +2,7 @@ package com.example.TaskFlow.service;
 
 import com.example.TaskFlow.common.error.ErrorCode;
 import com.example.TaskFlow.common.exception.TaskFlowBadRequestException;
+import com.example.TaskFlow.config.jwt.JwtTokenProvider;
 import com.example.TaskFlow.dao.AccountDao;
 import com.example.TaskFlow.model.request.AuthenticationRequest;
 import com.example.TaskFlow.model.request.SignUpRequest;
@@ -15,10 +16,12 @@ import org.springframework.stereotype.Service;
 public class AccountService {
     private final AccountDao accountDao;
     private final PasswordEncoder passwordEncoder;
+    private final JwtTokenProvider jwtTokenProvider;
 
-    public AccountService(AccountDao accountDao, PasswordEncoder passwordEncoder) {
+    public AccountService(AccountDao accountDao, PasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider) {
         this.accountDao = accountDao;
         this.passwordEncoder = passwordEncoder;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     public LoginResponse login(AuthenticationRequest loginRequest) throws TaskFlowBadRequestException {
@@ -38,8 +41,14 @@ public class AccountService {
                     "아이디 또는 비밀번호가 일치하지 않습니다."
             );
         }
+        // jwt 토큰 발금
+        String token = jwtTokenProvider.generateToken(
+                accountInfo.getLoginId(),
+                accountInfo.getRoleCode()
+        );
 
         LoginResponse loginResponse = new LoginResponse();
+        loginResponse.setToken(token);
         loginResponse.setLoginId(accountInfo.getLoginId());
         loginResponse.setName(accountInfo.getName());
         loginResponse.setPhone(accountInfo.getPhone());

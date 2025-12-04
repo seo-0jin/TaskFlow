@@ -27,7 +27,7 @@ public class AccountController {
 
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
-        this.DASHBOARD_URL = TaskDefine.DASHBOARD_URL;
+//        this.DASHBOARD_URL = TaskDefine.DASHBOARD_URL;
     }
 
     @Operation(summary = "로그인", description = "로그인. ID/PW를 입력하여 인증한다.")
@@ -37,21 +37,8 @@ public class AccountController {
                                                      AuthenticationRequest loginRequest) {
         try {
             LoginResponse privateLoginResponse = accountService.login(loginRequest);
-            // 2. 로그인 성공 시, 세션 생성
-            HttpSession existingSession = request.getSession(false);
-            if (existingSession != null) {
-                existingSession.invalidate();
-            }
-            HttpSession session = request.getSession(true);
 
-            session.setAttribute("accountId", privateLoginResponse.getLoginId());
-            session.setAttribute("role", privateLoginResponse.getRoleCode());
-            session.setAttribute(
-                    org.springframework.session.FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME,
-                    privateLoginResponse.getLoginId()
-            );
-
-            return ApiResponseUtil.ok(DASHBOARD_URL);
+            return ApiResponseUtil.ok(privateLoginResponse);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
