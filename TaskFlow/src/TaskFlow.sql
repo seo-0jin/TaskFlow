@@ -19,6 +19,7 @@ CREATE TABLE users (
     login_id        VARCHAR(50) NOT NULL UNIQUE,  -- 로그인용 아이디
     password        VARCHAR(255) NOT NULL,        -- 해시된 비밀번호
     name            VARCHAR(50) NOT NULL,         -- 이름
+    email           VARCHAR(255) NOT NULL UNIQUE, -- 이메일
     phone           VARCHAR(20),                  -- 핸드폰 번호
     role_code       VARCHAR(20) NOT NULL,         -- FK -> roles
     status          VARCHAR(20) NOT NULL DEFAULT 'ACTIVE',  -- ACTIVE / INACTIVE

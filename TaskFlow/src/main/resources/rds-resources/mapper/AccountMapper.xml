@@ -5,7 +5,6 @@
 <mapper namespace="TaskFlowAccountMapper">
     <resultMap id="AccountWithRoleDateInfoResultMap"
                type="com.example.TaskFlow.model.response.account.TaskAccountResponse">
-        <!-- GDPMS_ACCOUNT (ga) -->
         <result property="loginId" column="login_id"/>
         <result property="password" column="password"/>
         <result property="name" column="name"/>
@@ -45,8 +44,8 @@
     </select>
 
     <insert id="insertAccount" parameterType="map">
-        INSERT INTO users (login_id, password, name, phone, role_code, status)
-        VALUES (#{loginId}, #{password}, #{name}, #{phone}, #{roleCode}, 'ACTIVE')
+        INSERT INTO users (login_id, password, name, email, phone, role_code, status)
+        VALUES (#{loginId}, #{password}, #{name}, #{email}, #{phone}, #{roleCode}, 'ACTIVE')
     </insert>
 
 

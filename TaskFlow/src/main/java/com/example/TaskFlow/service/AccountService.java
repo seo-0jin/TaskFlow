@@ -35,12 +35,13 @@ public class AccountService {
                     "아이디 또는 비밀번호가 일치하지 않습니다.");
         }
 
-        if (!password.equals(accountInfo.getPassword())) {
+        if (!passwordEncoder.matches(password, accountInfo.getPassword())) {
             throw new TaskFlowBadRequestException(
                     ErrorCode.LOGIN_FAILED,
                     "아이디 또는 비밀번호가 일치하지 않습니다."
             );
         }
+
         // jwt 토큰 발금
         String token = jwtTokenProvider.generateToken(
                 accountInfo.getLoginId(),
@@ -51,10 +52,10 @@ public class AccountService {
         loginResponse.setToken(token);
         loginResponse.setLoginId(accountInfo.getLoginId());
         loginResponse.setName(accountInfo.getName());
+        loginResponse.setEmail(accountInfo.getEmail());
         loginResponse.setPhone(accountInfo.getPhone());
         loginResponse.setRoleCode(accountInfo.getRoleCode());
         loginResponse.setStatus(accountInfo.getStatus());
-        loginResponse.setLastLoginAt(accountInfo.getLastLoginAt());
         loginResponse.setCreatedAt(accountInfo.getCreatedAt());
         loginResponse.setUpdatedAt(accountInfo.getUpdatedAt());
 
@@ -68,7 +69,6 @@ public class AccountService {
 
     public void signUp(SignUpRequest request) throws TaskFlowBadRequestException {
         String loginId = request.getLoginId();
-
         if (existsByLoginId(loginId)) {
             throw new TaskFlowBadRequestException(
                     ErrorCode.DUPLICATED_LOGIN_ID,
@@ -81,6 +81,7 @@ public class AccountService {
         accountInfo.setLoginId(loginId);
         accountInfo.setPassword(encodedPassword);
         accountInfo.setName(request.getName());
+        accountInfo.setEmail(request.getEmail());
         accountInfo.setPhone(request.getPhone());
         accountInfo.setRoleCode(request.getRoleCode() != null ? request.getRoleCode() : "USER");
 

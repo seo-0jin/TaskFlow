@@ -19,6 +19,10 @@ public class TaskAccountResponse {
     @JsonProperty("name")
     private String name;
 
+    @Schema(description = "사용자 이메일")
+    @JsonProperty("email")
+    private String email;
+
     @Schema(description = "사용자 핸드폰")
     @JsonProperty("phone")
     private String phone;

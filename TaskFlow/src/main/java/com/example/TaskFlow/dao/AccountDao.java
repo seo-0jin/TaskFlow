@@ -33,6 +33,7 @@ public class AccountDao {
         params.put("loginId", accountInfo.getLoginId());
         params.put("password", accountInfo.getPassword());
         params.put("name", accountInfo.getName());
+        params.put("email", accountInfo.getEmail());
         params.put("phone", accountInfo.getPhone());
         params.put("roleCode", accountInfo.getRoleCode());
 
