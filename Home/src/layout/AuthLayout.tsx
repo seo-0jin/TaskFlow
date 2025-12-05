@@ -1,5 +1,5 @@
-// src/layouts/AuthLayout.tsx
 import type { ReactNode } from "react";
+import styles from "../scss/authLayout.module.scss";
 
 interface AuthLayoutProps {
   children: ReactNode;
@@ -7,15 +7,7 @@ interface AuthLayoutProps {
 
 const AuthLayout = ({ children }: AuthLayoutProps) => {
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#f5f5f5",
-      }}
-    >
+    <div className={styles["auth-layout"]}>
       <div
         style={{
           backgroundColor: "#fff",

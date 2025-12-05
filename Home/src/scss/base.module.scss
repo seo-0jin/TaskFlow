@@ -1,0 +1,19 @@
+.popup {
+  max-width: 440px;
+  min-height: 130px;
+
+  .pop-body {
+    p {
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #4ad395;
+      color: #f2f2f2;
+    }
+    
+    button:hover {
+      background-color: #65bf97;
+    }
+  }
+}

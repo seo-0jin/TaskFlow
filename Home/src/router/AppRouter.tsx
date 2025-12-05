@@ -1,9 +1,8 @@
 // src/router/AppRouter.tsx
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { RoutePath } from "../const/RoutePath";
-import LoginPage from "../pages/LoginPage";
-import SignUpPage from "../pages/SignUpPage";
+import AuthPage from "../pages/AuthPage";
 import PrivateRoute from "./PrivateRoute";
 import DashBoardPage from "../pages/DashBoardPage";
 
@@ -18,9 +17,7 @@ export default function AppRouter() {
     <BrowserRouter>
       <Routes>
         {/* 로그인 페이지 */}
-        <Route path={RoutePath.LOGIN} element={<LoginPage />} />
-        {/* 회원가입 페이지 */}
-        <Route path={RoutePath.SIGNUP} element={<SignUpPage />} />
+        <Route path={RoutePath.LOGIN} element={<AuthPage />} />
 
         {/* 보호된 페이지 (로그인 필요) */}
         {/* 대시보드 */}
@@ -46,7 +43,7 @@ export default function AppRouter() {
           path="*"
           element={
             <PrivateRoute>
-              <LoginPage />
+              <AuthPage />
             </PrivateRoute>
           }
         />

@@ -7,6 +7,7 @@ export const useSignUpViewModel = () => {
         loginId: "",
         password: "",
         name: "",
+        email: "",
         phone: "",
         position: "",
         loading: false,
@@ -25,6 +26,10 @@ export const useSignUpViewModel = () => {
         setState(prev => ({ ...prev, name: value }));
     };
 
+    const setEmail = (value: string) => {
+        setState(prev => ({ ...prev, email: value }));
+    };
+
     const setPhone = (value: string) => {
         setState(prev => ({ ...prev, phone: value }));
     };
@@ -36,24 +41,25 @@ export const useSignUpViewModel = () => {
     const submit = async () => {
         setState(prev => ({ ...prev, loading: true, error: null }));
         const payload: SignUpRequest = {
-            loginId: "",
-            password: "",
-            name: "",
-            phone: "",
-            position: ""
+            loginId: state.loginId,
+            password: state.password,
+            name: state.name,
+            email: state.email,
+            phone: state.phone,
+            position: state.position
         }
 
         try {
             // 1) 아이디 중복 체크
-            const available = await signUpService.checkLoginId(payload.loginId);
-            if (!available) {
-                setState(prev => ({
-                    ...prev,
-                    loading: false,
-                    error: "이미 사용 중인 아이디입니다.",
-                }));
-                return null;
-            }
+            // const available = await signUpService.checkLoginId(payload.loginId);
+            // if (!available) {
+            //     setState(prev => ({
+            //         ...prev,
+            //         loading: false,
+            //         error: "이미 사용 중인 아이디입니다.",
+            //     }));
+            //     return null;
+            // }
 
             // 2) loginId 사용 가능하면 회원가입 요청
             const res = await signUpService.signUp(payload);
@@ -75,6 +81,7 @@ export const useSignUpViewModel = () => {
         setLoginId,
         setPassword,
         setName,
+        setEmail,
         setPhone,
         setPosition,
         submit
