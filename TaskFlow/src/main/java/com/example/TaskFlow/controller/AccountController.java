@@ -1,6 +1,7 @@
 package com.example.TaskFlow.controller;
 
 import com.example.TaskFlow.common.conf.PathConf;
+import com.example.TaskFlow.common.error.ErrorCode;
 import com.example.TaskFlow.define.TaskDefine;
 import com.example.TaskFlow.model.request.AuthenticationRequest;
 import com.example.TaskFlow.model.request.SignUpRequest;
@@ -13,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,13 +37,8 @@ public class AccountController {
     public ResponseEntity<ApiResponse<Object>> login(HttpServletRequest request,
                                                      @RequestBody
                                                      AuthenticationRequest loginRequest) {
-        try {
-            LoginResponse privateLoginResponse = accountService.login(loginRequest);
-
-            return ApiResponseUtil.ok(privateLoginResponse);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        LoginResponse privateLoginResponse = accountService.login(loginRequest);
+        return ApiResponseUtil.ok(privateLoginResponse);
     }
 
     @Operation(summary = "아이디 중복 검사", description = "아이디 중복 검사")
@@ -54,14 +51,19 @@ public class AccountController {
 
     @Operation(summary = "회원가입", description = "회원가입")
     @RequestMapping(value = PathConf.SIGNUP, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ApiResponse<Object>> signUp(
+    public ResponseEntity<ApiResponse<Void>> signUp(
             @RequestBody
             SignUpRequest signUpRequest) {
-        try {
-            accountService.signUp(signUpRequest);
-            return ApiResponseUtil.ok("회원가입이 완료되었습니다.");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+
+        accountService.signUp(signUpRequest);
+
+        ApiResponse<Void> body = ApiResponse.<Void>builder()
+                .status(String.valueOf(HttpStatus.OK.value()))
+                .code(ErrorCode.SUCCESS.getCode())
+                .message("회원가입이 완료되었습니다.")
+                .data(null)
+                .build();
+
+        return ResponseEntity.ok(body);
     }
 }

@@ -44,11 +44,15 @@
     </select>
 
     <insert id="insertAccount" parameterType="map">
-        INSERT INTO users (login_id, password, name, email, phone, role_code, status)
-        VALUES (#{loginId}, #{password}, #{name}, #{email}, #{phone}, #{roleCode}, 'ACTIVE')
+        INSERT INTO users (login_id, password, name, email, phone, role_code, position_code, status)
+        VALUES (#{loginId}, #{password}, #{name}, #{email}, #{phone}, #{roleCode}, 'J1', 'ACTIVE')
     </insert>
 
-
+    <update id="updateLastLoginAt" parameterType="string">
+        UPDATE users
+        SET last_login_at = NOW()
+        WHERE login_id = #{loginId}
+    </update>
     <!--    <select id="selectAccountByIds" parameterType="list" resultMap="AccountWithRoleDateInfoResultMap">-->
     <!--        SELECT-->
     <!--        <include refid="accountInfoColumns"/>,-->

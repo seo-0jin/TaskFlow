@@ -39,4 +39,8 @@ public class AccountDao {
 
         return sqlSessionTemplate.insert(NAMESPACE.concat("insertAccount"), params);
     }
+
+    public void updateLastLoginAt(String loginId) {
+        sqlSessionTemplate.update(NAMESPACE.concat("updateLastLoginAt"), loginId);
+    }
 }

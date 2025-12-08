@@ -42,6 +42,8 @@ public class AccountService {
             );
         }
 
+        accountDao.updateLastLoginAt(accountInfo.getLoginId());
+
         // jwt 토큰 발금
         String token = jwtTokenProvider.generateToken(
                 accountInfo.getLoginId(),

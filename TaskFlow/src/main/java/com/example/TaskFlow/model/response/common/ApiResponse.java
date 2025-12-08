@@ -20,4 +20,11 @@ public class ApiResponse<T> {
     @Schema(description = "Rest API 응답 Body")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private T data;
+
+    public ApiResponse(String status, String code, String message, T data) {
+        this.status = status;
+        this.code = code;
+        this.message = message;
+        this.data = data;
+    }
 }
