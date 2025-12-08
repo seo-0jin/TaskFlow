@@ -3,6 +3,8 @@ import type { LoginResponse } from "../data/response/LoginResponse";
 import type { LoginRequest } from "../data/request/LoginRequest";
 import { loginService } from "../service/LoginService";
 import { useAuthStore } from "../store/useAuthStore";
+import axios, { AxiosError } from "axios";
+import type { ApiResponse } from "../data/response/common/ApiResponse";
 
 export interface LoginFormState {
     loginId: string;
@@ -60,10 +62,20 @@ export const useLoginViewModel = (): LoginViewModel => {
             setState(prev => ({ ...prev, loading: false }));
             return user;
         } catch (e: any) {
+            let errorMessage = "로그인 중 오류가 발생했습니다.";
+
+            if (axios.isAxiosError(e)) {
+                const axiosError = e as AxiosError<ApiResponse<unknown>>;
+                const apiResponse = axiosError.response?.data;
+
+                if (apiResponse?.message) {
+                    errorMessage = apiResponse.message;
+                }
+            }
             setState(prev => ({
                 ...prev,
                 loading: false,
-                error: e.message || "로그인 중 오류가 발생했습니다.",
+                error: errorMessage,
             }));
             return null;
         }

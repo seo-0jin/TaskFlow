@@ -4,11 +4,12 @@ import { useLoginViewModel } from "../viewmodels/useLoginViewModel";
 import styles from "../scss/login.module.scss";
 import AuthLayout from "../layout/AuthLayout";
 import { useSignUpViewModel } from "../viewmodels/useSignUpViewModel";
-import { route } from "../utils/RouteUtil";
-import { RoutePath } from "../const/RoutePath";
 import { AlertPopup } from "../components/popup/AlertPopup";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 const AuthPage = () => {
+  useDocumentTitle("시작하기");
+
   const navigate = useNavigate();
   const {
     state: loginState,
@@ -24,7 +25,6 @@ const AuthPage = () => {
     setName: setSignUpName,
     setEmail: setSignUpEmail,
     setPhone: setSignUpPhone,
-    setPosition: setSignUpPosition,
     submit: submitSignUp,
   } = useSignUpViewModel();
 
@@ -54,7 +54,8 @@ const AuthPage = () => {
 
   const handleConfirmAlert = () => {
     setAlertOpen(false);
-    route(RoutePath.LOGIN);
+    setIsSignUpMode(false); // 로그인 폼으로 전환
+    // route(RoutePath.LOGIN);
   };
 
   // 로그인 페이지에서만 사용되는 아이콘
@@ -102,7 +103,7 @@ const AuthPage = () => {
               <div className={styles["login__box"]}>
                 <i className={`bx bx-lock ${styles["login__icon"]}`}></i>
                 <input
-                  type="text"
+                  type="password"
                   placeholder="Password"
                   className={styles["login__input"]}
                   value={loginState.password}
@@ -110,7 +111,9 @@ const AuthPage = () => {
                 />
               </div>
 
-              {loginState.error && <p className="error">{loginState.error}</p>}
+              {loginState.error && (
+                <p className="error-font">{loginState.error}</p>
+              )}
               <button
                 type="submit"
                 className={styles["login__button"]}
@@ -154,6 +157,9 @@ const AuthPage = () => {
                   onChange={(e) => setSignUpLoginId(e.target.value)}
                 />
               </div>
+              {signUpState.error && (
+                <p className="error-font">{signUpState.error}</p>
+              )}
 
               <div className={styles["login__box"]}>
                 <i className={`bx bx-lock ${styles["login__icon"]}`}></i>
@@ -196,17 +202,6 @@ const AuthPage = () => {
                   className={styles["login__input"]}
                   value={signUpState.phone}
                   onChange={(e) => setSignUpPhone(e.target.value)}
-                />
-              </div>
-
-              <div className={styles["login__box"]}>
-                <i className={`bx bx-at ${styles["login__icon"]}`}></i>
-                <input
-                  type="text"
-                  placeholder="Position"
-                  className={styles["login__input"]}
-                  value={signUpState.position}
-                  onChange={(e) => setSignUpPosition(e.target.value)}
                 />
               </div>
 

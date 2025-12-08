@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { signUpService } from "../service/SignUpService";
 import type { SignUpRequest } from "../data/request/SignUpRequest";
+import axios, { AxiosError } from "axios";
+import type { ApiResponse } from "../data/response/common/ApiResponse";
 
 export const useSignUpViewModel = () => {
     const [state, setState] = useState({
@@ -9,7 +11,6 @@ export const useSignUpViewModel = () => {
         name: "",
         email: "",
         phone: "",
-        position: "",
         loading: false,
         error: null as string | null,
     });
@@ -34,10 +35,6 @@ export const useSignUpViewModel = () => {
         setState(prev => ({ ...prev, phone: value }));
     };
 
-    const setPosition = (value: string) => {
-        setState(prev => ({ ...prev, position: value }));
-    };
-
     const submit = async () => {
         setState(prev => ({ ...prev, loading: true, error: null }));
         const payload: SignUpRequest = {
@@ -46,33 +43,31 @@ export const useSignUpViewModel = () => {
             name: state.name,
             email: state.email,
             phone: state.phone,
-            position: state.position
         }
 
         try {
-            // 1) 아이디 중복 체크
-            // const available = await signUpService.checkLoginId(payload.loginId);
-            // if (!available) {
-            //     setState(prev => ({
-            //         ...prev,
-            //         loading: false,
-            //         error: "이미 사용 중인 아이디입니다.",
-            //     }));
-            //     return null;
-            // }
-
-            // 2) loginId 사용 가능하면 회원가입 요청
-            const res = await signUpService.signUp(payload);
+            await signUpService.signUp(payload);
 
             setState(prev => ({ ...prev, loading: false }));
-            return res;
+            return true;
         } catch (e: any) {
+            let errorMessage = "회원가입 중 오류가 발생했습니다.";
+
+            if (axios.isAxiosError(e)) {
+                const axiosError = e as AxiosError<ApiResponse<unknown>>;
+                const apiResponse = axiosError.response?.data;
+
+                if (apiResponse?.message) {
+                    errorMessage = apiResponse.message;
+                }
+            }
+
             setState(prev => ({
                 ...prev,
                 loading: false,
-                error: e.message || "회원가입 중 오류가 발생했습니다.",
+                error: errorMessage,
             }));
-            return null;
+            return false;
         }
     };
 
@@ -83,7 +78,6 @@ export const useSignUpViewModel = () => {
         setName,
         setEmail,
         setPhone,
-        setPosition,
         submit
     };
 };

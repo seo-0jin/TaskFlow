@@ -1,19 +1,208 @@
+:root {
+  --btn-bg: #4ad395;
+}
+
+:global(.error-font) {
+  color: red;
+  font-size: 14px;
+}
+
+// --------------------------- 버튼 --------------------------- //
+.btn-primary {
+  --btn-bg: #4ad395;
+}
+
+.btn-danger {
+  --btn-bg: #ff4d4d;
+}
+
+.btn-gray {
+  --btn-bg: #999;
+}
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 1px solid var(--btn-bg);
+  cursor: pointer;
+  color: #37383F;
+  background: white;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+/* fill-in 효과 전용 */
+.btnFill {
+  transition: 0.3s;
+
+  &:hover {
+    background: transparent;
+    color: white;
+    box-shadow: inset 0 0 0 36px var(--btn-bg, #4ad395);
+  }
+}
+
+/* 비활성화 상태 옵션 */
+.btnDisabled {
+  pointer-events: none;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+// --------------------------- 팝업 --------------------------- //
 .popup {
-  max-width: 440px;
-  min-height: 130px;
+  .pop_small {
+    width: 440px;
+  }
 
-  .pop-body {
-    p {
-      font-size: 14px;
+  .pop_medium {
+    width: 550px;
+  }
+
+  .pop_big {
+    width: 800px;
+  }
+
+  .pop_large {
+    width: 1100px;
+  }
+}
+
+.bg_wrap {
+  position: fixed;
+  z-index: 998;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.popup {
+  z-index: 999;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 100%;
+    margin-left: -2px;
+    vertical-align: middle;
+  }
+}
+
+.layerpop {
+  z-index: 999;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  width: 440px;
+  max-height: 98%;
+  line-height: 1.5;
+  text-align: left;
+  background: white;
+  vertical-align: middle;
+  border-radius: 4px;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.2);
+
+  .pophead {
+    padding: 20px 24px;
+    box-sizing: border-box;
+
+    + .popbody {
+      padding-top: 0;
     }
 
-    button {
-      background-color: #4ad395;
-      color: #f2f2f2;
+    .buttonClose {
+      position: absolute;
+      top: 22px;
+      right: 30px;
     }
-    
-    button:hover {
-      background-color: #65bf97;
+  }
+
+  .popbody {
+    overflow-y: auto;
+    position: relative;
+    max-height: 641px;
+    padding: 20px 24px 0;
+    text-align: left;
+    box-sizing: border-box;
+  }
+
+  .pophead_tit {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+  }
+
+  .pophead_sub {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+
+  .popSection_desc {
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .pop_msg {
+    font-size: 14px;
+
+    + .pop_desc {
+      font-size: 13px;
+      margin-top: 20px;
     }
+  }
+
+  .pop_desc {
+    font-size: 14px;
+    color: black;
+  }
+
+  .popfoot {
+    width: 100%;
+    padding: 30px 24px 20px;
+    text-align: right;
+    box-sizing: border-box;
+
+    .buttonComp {
+      height: 34px;
+      padding: 0 14px;
+      font-size: 16px;
+      margin-left: 6px;
+    }
+
+    .buttonLeft {
+      float: left;
+      margin: 0;
+    }
+  }
+
+  .tit_label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 400;
+  }
+
+  .type_divide {
+    padding-bottom: 20px;
+    border-bottom: 1px solid gray;
   }
 }
