@@ -192,3 +192,21 @@ INSERT INTO positions(position_code, name_ko, level, description) VALUES
 ('J3', '과장', 3, '팀 리드 보조'),
 ('J4', '차장', 4, '팀 리드'),
 ('J5', '부장', 5, '부서장');
+
+
+CREATE TABLE project_roles (
+    role_code VARCHAR(50) PRIMARY KEY,
+    role_name VARCHAR(100) NOT NULL
+);
+
+INSERT INTO project_roles (role_code, role_name) VALUES
+('OWNER', '프로젝트 관리자'),
+('PM', '프로젝트 매니저'),
+('DEV', '개발자'),
+('QA', '테스터'),
+('MEMBER', '일반 멤버');
+
+ALTER TABLE project_members
+ADD CONSTRAINT fk_project_members_role
+FOREIGN KEY (role_in_project)
+REFERENCES project_roles(role_code);
