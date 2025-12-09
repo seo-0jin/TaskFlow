@@ -4,4 +4,5 @@ export interface ApiResponse<T> {
   message?: string;
   status?: string;
   errorCode?: string;
+  code?: string;
 }

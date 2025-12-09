@@ -55,7 +55,6 @@ const AuthPage = () => {
   const handleConfirmAlert = () => {
     setAlertOpen(false);
     setIsSignUpMode(false); // 로그인 폼으로 전환
-    // route(RoutePath.LOGIN);
   };
 
   // 로그인 페이지에서만 사용되는 아이콘
@@ -72,7 +71,7 @@ const AuthPage = () => {
 
   return (
     <AuthLayout>
-      <div className="login">
+      <div className={styles.login}>
         <div className={styles["login__content"]}>
           <div className={styles["login__img"]}>
             <img
@@ -86,7 +85,6 @@ const AuthPage = () => {
               className={`${styles["login__register"]} ${
                 isSignUpMode ? styles.none : styles.block
               }`}
-              id="login-in"
               onSubmit={handleSubmitLogin}
             >
               <h1 className={styles["login__title"]}>로그인</h1>
@@ -114,6 +112,7 @@ const AuthPage = () => {
               {loginState.error && (
                 <p className="error-font">{loginState.error}</p>
               )}
+
               <button
                 type="submit"
                 className={styles["login__button"]}
@@ -130,7 +129,6 @@ const AuthPage = () => {
                 </span>
                 <span
                   className={`${styles["login__signin"]} ${styles["login__signin--signup"]}`}
-                  id="sign-up"
                   onClick={() => setIsSignUpMode(true)}
                 >
                   계정 생성
@@ -143,7 +141,6 @@ const AuthPage = () => {
               className={`${styles["login__create"]} ${
                 isSignUpMode ? styles.block : styles.none
               }`}
-              id="login-up"
               onSubmit={handleSubmitSignUp}
             >
               <h1 className={styles["login__title"]}>계정 생성</h1>
@@ -157,8 +154,9 @@ const AuthPage = () => {
                   onChange={(e) => setSignUpLoginId(e.target.value)}
                 />
               </div>
-              {signUpState.error && (
-                <p className="error-font">{signUpState.error}</p>
+              
+              {signUpState.loginIdError && (
+                <p className="error-font">{signUpState.loginIdError}</p>
               )}
 
               <div className={styles["login__box"]}>
@@ -194,6 +192,10 @@ const AuthPage = () => {
                 />
               </div>
 
+               {signUpState.emailError && (
+                <p className="error-font">{signUpState.emailError}</p>
+              )}
+
               <div className={styles["login__box"]}>
                 <i className={`bx bx-at ${styles["login__icon"]}`}></i>
                 <input
@@ -209,7 +211,7 @@ const AuthPage = () => {
                 계정 생성
               </button>
 
-              <div>
+              <div className={styles["login__gap"]}>
                 <span
                   className={`${styles["login__account"]} ${styles["login__account--account"]}`}
                 >
@@ -217,7 +219,6 @@ const AuthPage = () => {
                 </span>
                 <span
                   className={`${styles["login__signup"]} ${styles["login__signup--signup"]}`}
-                  id="sign-in"
                   onClick={() => setIsSignUpMode(false)}
                 >
                   로그인
