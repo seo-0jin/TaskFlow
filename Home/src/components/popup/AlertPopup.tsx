@@ -21,7 +21,7 @@ export const AlertPopup = ({ open, message, onConfirm }: AlertPopupProps) => {
           <p className={styles.pop_desc}>{message}</p>
         </div>
         <div className={styles.popfoot}>
-          <Button text={"확인"}></Button>
+          <Button text={"확인"} onConfirm={onConfirm}></Button>
         </div>
       </div>
     </div>

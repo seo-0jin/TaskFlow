@@ -8,7 +8,7 @@ const HeaderLayout = () => {
         <img src="/public/icons/project-pulse-logo.png" alt="" />
       </div>
       <div>
-        <Button text="로그아웃"></Button>
+        <Button text="로그아웃" size="small"></Button>
       </div>
     </header>
   );
