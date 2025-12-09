@@ -1,58 +1,102 @@
-:root {
-  --btn-bg: #4ad395;
-}
-
 :global(.error-font) {
-  color: red;
-  font-size: 14px;
+  color: var(--error-color);
+  margin-top: 8px;
+  font-size: 16px;
 }
 
 // --------------------------- 버튼 --------------------------- //
+.btn {
+  padding: 15px 20px;
+  border: none;
+  outline: none;
+  // background-color: #151515;
+  color: #eee;
+  border-radius: 7px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease-out;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+}
+
 .btn-primary {
-  --btn-bg: #4ad395;
+  background-color: var(--btn-bg);
+  color: var(--font-white);
 }
 
 .btn-danger {
-  --btn-bg: #ff4d4d;
+  background-color: var(--error-color);
+  color: var(--font-white);
 }
 
 .btn-gray {
-  --btn-bg: #999;
+  background-color: var(--btn-gray);
+  color: var(--font-default);
 }
 
-.btn {
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  border: 1px solid var(--btn-bg);
-  cursor: pointer;
-  color: #37383F;
-  background: white;
-  transition: 0.3s;
-  font-weight: 600;
+.btn-small {
+  padding: 6px 12px;
+  font-size: 0.7rem;
+}
+
+.btn-medium {
+  padding: 10px 16px;
+  font-size: 0.9rem;
+}
+
+.btn-large {
+  padding: 14px 22px;
+  font-size: 1.1rem;
+}
+
+// .btn {
+//   position: relative;
+//   display: inline-flex;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 0.7rem 1.2rem;
+//   border-radius: 8px;
+//   font-size: 0.75rem;
+//   font-weight: 500;
+//   border: 1px solid var(--btn-bg);
+//   cursor: pointer;
+//   color: var(--font-default);
+//   background: white;
+//   transition: 0.3s;
+//   font-weight: 600;
+// }
+
+.btn:active {
+  box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.3);
 }
 
 /* fill-in 효과 전용 */
-.btnFill {
-  transition: 0.3s;
+// .btnFill {
+//   transition: 0.3s;
 
-  &:hover {
-    background: transparent;
-    color: white;
-    box-shadow: inset 0 0 0 36px var(--btn-bg, #4ad395);
-  }
-}
+//   &:hover {
+//     background: transparent;
+//     color: white;
+//     box-shadow: inset 0 0 0 36px var(--btn-bg, #4ad395);
+//   }
+// }
 
 /* 비활성화 상태 옵션 */
 .btnDisabled {
   pointer-events: none;
   opacity: 0.6;
   box-shadow: none;
+}
+
+// --------------------------- Main --------------------------- //
+.mainContent {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 80px - 40px); // 헤더 + 푸터 뺀 높이
+  padding-top: 80px; // 헤더만큼 띄우기
+  padding-bottom: 40px;
 }
 
 // --------------------------- 팝업 --------------------------- //

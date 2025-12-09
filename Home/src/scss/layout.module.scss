@@ -1,12 +1,15 @@
 // --------------------------- Header --------------------------- //
 .header {
   position: fixed;
+  top: 0;
+  left: 0;
   height: 80px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
+  z-index: 999;
 
   .header_left {
     display: flex;
@@ -22,6 +25,7 @@
 .footer {
   position: fixed;
   bottom: 0;
+  left: 0;
   padding: 8px 12px;
   height: 40px;
   width: 100%;
@@ -32,11 +36,11 @@
 }
 
 // --------------------------- Login --------------------------- //
-.auth-layout {
-  position: relative;
-  top: 80px;
-  min-height: calc(100vh - 80px - 40px);
-  display: flex;
-  align-items: center;
-  justify-self: center;
-}
+// .auth-layout {
+//   position: relative;
+//   top: 80px;
+//   min-height: calc(100vh - 80px - 40px);
+//   display: flex;
+//   align-items: center;
+//   justify-self: center;
+// }

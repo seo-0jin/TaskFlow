@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
 
 $color: #4ad395;
-$color-dark: #23004d;
+$color-dark: #151515;
 $color-light: #a49eac;
 $color-lighten: #f2f2f2;
 $color-hover: #65bf97;
@@ -19,13 +19,7 @@ $small-font-size: 0.813rem;
 ::after {
   box-sizing: border-box;
 }
-body {
-  margin: 0;
-  padding: 0;
-  font-family: $font;
-  font-size: $normal-font-size;
-  color: $color-dark;
-}
+
 h1 {
   margin: 0;
 }
@@ -41,7 +35,7 @@ img {
 .login {
   display: grid;
   grid-template-columns: 100%;
-  height: 100vh;
+  height: calc(100vh - 80px - 40px);
   margin-left: 1.5rem;
   margin-right: 1.5rem;
 
@@ -72,6 +66,7 @@ img {
   }
   &__title {
     font-size: $big-font-size;
+    font-weight: 800;
     margin-bottom: 2rem;
   }
   &__box {
@@ -85,7 +80,7 @@ img {
   }
   &__icon {
     font-size: 1.5rem;
-    color: $color;
+    color: $color-dark;
   }
   &__input {
     border: none;
@@ -115,8 +110,8 @@ img {
     display: block;
     width: 90%;
     padding: 1rem;
-    margin: 2rem 0;
-    background-color: $color;
+    margin: 1rem 0;
+    background-color: $color-dark;
     color: #fff;
     font-weight: 600;
     text-align: center;
@@ -124,7 +119,7 @@ img {
     transition: 0.3s;
 
     &:hover {
-      background-color: $color-hover;
+      transform: translateY(-3px);
     }
   }
   &__account,
@@ -138,7 +133,7 @@ img {
     }
     &--signin,
     &--signup {
-      color: $color;
+      color: $color-light;
       cursor: pointer;
     }
   }
@@ -185,13 +180,12 @@ img {
 }
 @media screen and (min-width: 1024px) {
   .login {
-    height: 100vh;
+    height: calc(100vh - 80px - 40px);
     overflow: hidden;
     &__content {
       grid-template-columns: repeat(2, max-content);
       justify-content: center;
       align-items: center;
-      margin-left: 10rem;
     }
     &__img {
       display: flex;
