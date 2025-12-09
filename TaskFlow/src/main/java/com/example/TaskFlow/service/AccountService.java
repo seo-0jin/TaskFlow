@@ -64,17 +64,30 @@ public class AccountService {
         return loginResponse;
     }
 
-    // 회원가입 중복 검사
+    // 회원가입 Login ID 중복 검사
     public boolean existsByLoginId(String loginId) throws TaskFlowBadRequestException {
         return accountDao.getExistsByLoginId(loginId);
     }
 
+    // 회원가입 EMAIL 중복 검사
+    public boolean existsByEmail(String email) throws TaskFlowBadRequestException {
+        return accountDao.getExistsByEmail(email);
+    }
+
     public void signUp(SignUpRequest request) throws TaskFlowBadRequestException {
         String loginId = request.getLoginId();
+        String email = request.getEmail();
         if (existsByLoginId(loginId)) {
             throw new TaskFlowBadRequestException(
                     ErrorCode.DUPLICATED_LOGIN_ID,
                     "이미 사용 중인 아이디입니다."
+            );
+        }
+        
+        if (existsByEmail(email)) {
+            throw new TaskFlowBadRequestException(
+                    ErrorCode.DUPLICATED_EMAIL,
+                    "이미 사용 중인 이메일입니다."
             );
         }
 

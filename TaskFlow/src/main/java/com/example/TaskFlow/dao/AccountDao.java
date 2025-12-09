@@ -28,6 +28,10 @@ public class AccountDao {
         return sqlSessionTemplate.selectOne(NAMESPACE.concat("existsByLoginId"), accountId);
     }
 
+    public boolean getExistsByEmail(String email) {
+        return sqlSessionTemplate.selectOne(NAMESPACE.concat("existsByEmail"), email);
+    }
+
     public int insertAccount(TaskAccountResponse accountInfo) {
         Map<String, Object> params = new HashMap<>();
         params.put("loginId", accountInfo.getLoginId());

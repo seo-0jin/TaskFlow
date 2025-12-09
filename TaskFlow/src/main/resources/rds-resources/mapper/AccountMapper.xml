@@ -43,6 +43,12 @@
         ) THEN 1 ELSE 0 END
     </select>
 
+    <select id="existsByEmail" parameterType="string" resultType="boolean">
+        SELECT CASE WHEN EXISTS(
+        SELECT 1 FROM users WHERE email = #{email}
+        ) THEN 1 ELSE 0 END
+    </select>
+
     <insert id="insertAccount" parameterType="map">
         INSERT INTO users (login_id, password, name, email, phone, role_code, position_code, status)
         VALUES (#{loginId}, #{password}, #{name}, #{email}, #{phone}, #{roleCode}, 'J1', 'ACTIVE')
