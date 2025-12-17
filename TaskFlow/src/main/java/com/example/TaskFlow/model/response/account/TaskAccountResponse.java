@@ -35,6 +35,10 @@ public class TaskAccountResponse {
     @JsonProperty("status")
     private String status;
 
+    @Schema(description = "마지막 로그인 시간")
+    @JsonProperty("last_login_at")
+    private String lastLoginAt;
+
     @Schema(description = "계정 생성 시간")
     @JsonProperty("created_at")
     private String createdAt;

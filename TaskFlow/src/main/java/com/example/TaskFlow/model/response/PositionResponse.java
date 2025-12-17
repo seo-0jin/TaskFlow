@@ -8,6 +8,6 @@ import lombok.Data;
 public class PositionResponse {
     private String positionCode;
     private String nameKo;
-    private String descrition;
+    private String description;
     private int level;
 }

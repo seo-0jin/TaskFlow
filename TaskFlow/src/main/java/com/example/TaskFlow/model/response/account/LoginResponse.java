@@ -17,10 +17,6 @@ public class LoginResponse extends TaskAccountResponse{
     @JsonProperty("session_id")
     private String sessionId;
 
-    @Schema(description = "마지막 로그인 시간")
-    @JsonProperty("last_login_date")
-    private Long lastLoginDate;
-
     @Schema(description = "Client Ip Addr")
     @JsonProperty("client_ip")
     private String clientIp;
