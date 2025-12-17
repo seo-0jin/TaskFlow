@@ -58,6 +58,7 @@ public class AccountService {
         loginResponse.setPhone(accountInfo.getPhone());
         loginResponse.setRoleCode(accountInfo.getRoleCode());
         loginResponse.setStatus(accountInfo.getStatus());
+        loginResponse.setLastLoginAt(accountInfo.getLastLoginAt());
         loginResponse.setCreatedAt(accountInfo.getCreatedAt());
         loginResponse.setUpdatedAt(accountInfo.getUpdatedAt());
 
