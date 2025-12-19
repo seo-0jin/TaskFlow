@@ -210,3 +210,29 @@ ALTER TABLE project_members
 ADD CONSTRAINT fk_project_members_role
 FOREIGN KEY (role_in_project)
 REFERENCES project_roles(role_code);
+
+CREATE TABLE project_templates (
+  id            BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  name          VARCHAR(100) NOT NULL,
+  description   TEXT,
+  config_json   JSONB NOT NULL,  -- 상태/타입/우선순위/프로젝트역할/권한/기본컬럼 등을 통째로 저장
+  created_by    BIGINT, -- 누가 만들었는 지 user_id 참조
+  created_at    TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+  updated_at    TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+);
+
+ALTER TABLE project_templates
+  ADD CONSTRAINT fk_project_templates_created_by
+  FOREIGN KEY (created_by) REFERENCES users(id);
+
+--config_json 예시
+--{
+--  "statuses": ["TO_DO","IN_PROGRESS","REVIEW","DONE"],
+--  "issueTypes": ["BUG","FEATURE","IMPROVEMENT"],
+--  "priorities": ["CRITICAL","HIGH","MEDIUM","LOW"],
+--  "projectRoles": [
+--    { "roleCode":"PM", "permissions":["PROJECT_EDIT","MEMBER_INVITE","ISSUE_CREATE","ISSUE_UPDATE"] },
+--    { "roleCode":"DEV","permissions":["ISSUE_CREATE","ISSUE_UPDATE","COMMENT_WRITE"] }
+--  ],
+--  "defaultView": { "columns":["status","priority","title","assignee","dueDate"], "sort":"priority_desc" }
+--}

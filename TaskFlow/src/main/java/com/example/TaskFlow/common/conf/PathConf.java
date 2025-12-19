@@ -24,4 +24,9 @@ public class PathConf {
      * Dashboard
      */
     public static final String DASHBOARD_PROJECT_INFO = "/dashboard-project-info";
+
+    /**
+     * System
+     */
+    public static final String CREATE_PROJECT_TEMPLATE = "/create-project-template";
 }
