@@ -4,10 +4,10 @@ import Button from "../common/Button";
 type AlertPopupProps = {
   open: boolean;
   message: string;
-  onConfirm: () => void;
+  onClick: () => void;
 };
 
-export const AlertPopup = ({ open, message, onConfirm }: AlertPopupProps) => {
+export const AlertPopup = ({ open, message, onClick }: AlertPopupProps) => {
   if (!open) return null;
 
   return (
@@ -21,7 +21,7 @@ export const AlertPopup = ({ open, message, onConfirm }: AlertPopupProps) => {
           <p className={styles.pop_desc}>{message}</p>
         </div>
         <div className={styles.popfoot}>
-          <Button text={"확인"} onConfirm={onConfirm}></Button>
+          <Button text={"확인"} onClick={onClick}></Button>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoginViewModel } from "../viewmodels/useLoginViewModel";
-import styles from "../scss/login.module.scss";
+import styles from "@/scss/login.module.scss";
 import AuthLayout from "../layout/AuthLayout";
 import { useSignUpViewModel } from "../viewmodels/useSignUpViewModel";
 import { AlertPopup } from "../components/popup/AlertPopup";
@@ -154,7 +154,7 @@ const AuthPage = () => {
                   onChange={(e) => setSignUpLoginId(e.target.value)}
                 />
               </div>
-              
+
               {signUpState.loginIdError && (
                 <p className="error-font">{signUpState.loginIdError}</p>
               )}
@@ -192,7 +192,7 @@ const AuthPage = () => {
                 />
               </div>
 
-               {signUpState.emailError && (
+              {signUpState.emailError && (
                 <p className="error-font">{signUpState.emailError}</p>
               )}
 
@@ -230,7 +230,7 @@ const AuthPage = () => {
             <AlertPopup
               open={alertOpen}
               message={alertMessage}
-              onConfirm={handleConfirmAlert}
+              onClick={handleConfirmAlert}
             />
           </div>
         </div>

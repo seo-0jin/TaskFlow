@@ -2,6 +2,7 @@ export const RoutePath = {
   LOGIN: "/login",
   SIGNUP: "/signup",
   DASHBOARD: "/dashboard",
+  ISSUES: "/issue",
   UNKNOWN: "",
 } as const;
 

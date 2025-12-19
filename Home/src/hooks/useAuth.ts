@@ -1,19 +1,12 @@
 // src/hooks/useAuth.ts
-import { useEffect, useState } from "react";
-import { loadUser } from "../utils/AuthStorage";
-import type { LoginResponse } from "../data/response/LoginResponse";
+import { useAuthStore } from "../store/useAuthStore";
 
 export const useAuth = () => {
-  const [user, setUser] = useState<LoginResponse | null>(null);
-  const [loading, setLoading] = useState(true);
+  const user = useAuthStore((s) => s.user);
+  const token = useAuthStore((s) => s.token);
 
-  useEffect(() => {
-    const saved = loadUser();
-    if (saved) {
-      setUser(saved);
-    }
-    setLoading(false);
-  }, []);
-
-  return { user, loading, setUser };
-}
+  return {
+    user,
+    loading: false,
+  };
+};

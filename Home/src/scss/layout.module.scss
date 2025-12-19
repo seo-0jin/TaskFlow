@@ -1,3 +1,5 @@
+@use "base_mixin" as *;
+
 // --------------------------- Header --------------------------- //
 .header {
   position: fixed;
@@ -10,13 +12,98 @@
   justify-content: space-between;
   padding: 0 16px;
   z-index: 999;
+  border-bottom: 1px solid var(--line-default);
 
   .header_left {
     display: flex;
 
     img {
-      width: 160px;
-      height: 60px;
+      width: 120px;
+      height: 40px;
+    }
+  }
+
+  .header_right {
+    button {
+      margin-right: 10px;
+    }
+  }
+}
+
+// --------------------------- Sidebar --------------------------- //
+.sidebar_container {
+  position: relative;
+  z-index: 10;
+  display: block;
+  width: 260px;
+  height: 100%;
+  flex: 0 0 260px;
+
+  .sidebar_box {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    border-right: 2px solid var(--line-default);
+    padding: 4px 6px 64px 6px;
+    box-sizing: border-box;
+
+    .sidebar_subgroup {
+      padding: 10px 0px;
+    }
+
+    .sidebar_subheader {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      font-size: 16px;
+      font-weight: 500;
+      color: black;
+      padding: 11px 20px;
+      box-sizing: border-box;
+    }
+
+    .sidebar_item {
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.7);
+
+      .sidebar_item_button {
+        display: inline-block;
+        width: 100%;
+        padding: 10px 30px;
+        box-sizing: border-box;
+        // color: var(--palette-gray-darkGray3);
+
+        &:visited {
+          color: rgba(0, 0, 0, 0.9);
+          font-weight: bold;
+        }
+
+        &.on,
+        &:hover {
+          @include item_hover();
+        }
+      }
+
+      .sidebar_item_count {
+        display: inline-block;
+        padding: 0 8px;
+        margin: 0 0 0 6px;
+        height: 16px;
+        line-height: 16px;
+        text-align: center;
+        font-size: 12px;
+        color: white;
+        background-color: rgb(107, 107, 172);
+        border-radius: 20px;
+        box-sizing: border-box;
+      }
+    }
+
+    .sidebar_divider {
+      border-color: var(--line-default);
+      border-style: solid;
+      border-width: 0px 0px 1px;
     }
   }
 }

@@ -4,14 +4,17 @@
   font-size: 16px;
 }
 
+.hidden {
+  display: none !important;
+}
+
 // --------------------------- 버튼 --------------------------- //
 .btn {
   padding: 15px 20px;
   border: none;
   outline: none;
-  // background-color: #151515;
   color: #eee;
-  border-radius: 7px;
+  border-radius: 4px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.25s ease-out;
@@ -22,7 +25,7 @@
 }
 
 .btn-primary {
-  background-color: var(--btn-bg);
+  background-color: var(--btn-black);
   color: var(--font-white);
 }
 
@@ -51,37 +54,9 @@
   font-size: 1.1rem;
 }
 
-// .btn {
-//   position: relative;
-//   display: inline-flex;
-//   justify-content: center;
-//   align-items: center;
-//   padding: 0.7rem 1.2rem;
-//   border-radius: 8px;
-//   font-size: 0.75rem;
-//   font-weight: 500;
-//   border: 1px solid var(--btn-bg);
-//   cursor: pointer;
-//   color: var(--font-default);
-//   background: white;
-//   transition: 0.3s;
-//   font-weight: 600;
-// }
-
 .btn:active {
   box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.3);
 }
-
-/* fill-in 효과 전용 */
-// .btnFill {
-//   transition: 0.3s;
-
-//   &:hover {
-//     background: transparent;
-//     color: white;
-//     box-shadow: inset 0 0 0 36px var(--btn-bg, #4ad395);
-//   }
-// }
 
 /* 비활성화 상태 옵션 */
 .btnDisabled {
@@ -90,13 +65,162 @@
   box-shadow: none;
 }
 
+/* ------------------ 텍스트 버튼 variant ------------------ */
+.btnText {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+  transform: none; // fill버튼 hover transform 영향 제거
+
+  // uiverse 스타일 변수
+  --primary-color: #111;
+  --hovered-color: #c84747;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+
+  &:hover {
+    transform: none;
+  }
+
+  &::after {
+    position: absolute;
+    content: "";
+    width: 0;
+    left: 0;
+    bottom: -7px;
+    background: var(--hovered-color);
+    height: 2px;
+    transition: 0.3s ease-out;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+
+  &:hover .btnTextIcon {
+    transform: translateX(4px);
+    color: var(--hovered-color);
+  }
+}
+
+.btnTextLabel {
+  margin: 0;
+  position: relative;
+  font-size: 16px;
+  color: var(--primary-color);
+
+  &::before {
+    position: absolute;
+    content: attr(data-text);
+    width: 0%;
+    inset: 0;
+    color: var(--hovered-color);
+    overflow: hidden;
+    transition: 0.3s ease-out;
+  }
+
+  .btnText:hover &::before {
+    width: 100%;
+  }
+}
+
+.btnTextIcon {
+  color: var(--primary-color);
+  width: 15px;
+  position: relative;
+  transition: 0.2s;
+  transition-delay: 0.2s;
+}
+
+// --------------------------- Checkbox --------------------------- //
+/* From Uiverse.io by SelfMadeSystem */
+.container {
+  cursor: pointer;
+}
+
+.container {
+  input {
+    display: none;
+  }
+}
+
+.container {
+  svg {
+    overflow: visible;
+  }
+}
+
+.path {
+  fill: none;
+  stroke: var(--btn-black);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke-dasharray 0.5s ease, stroke-dashoffset 0.5s ease;
+  stroke-dasharray: 241 9999999;
+  stroke-dashoffset: 0;
+}
+
+.container input:checked ~ svg .path {
+  stroke-dasharray: 70.5096664428711 9999999;
+  stroke-dashoffset: -262.2723388671875;
+}
+
 // --------------------------- Main --------------------------- //
 .mainContent {
   position: relative;
   width: 100%;
-  min-height: calc(100vh - 80px - 40px); // 헤더 + 푸터 뺀 높이
+  // height: calc(100% - 80px - 40px); // 헤더 + 푸터 뺀 높이
+  height: 100%;
   padding-top: 80px; // 헤더만큼 띄우기
   padding-bottom: 40px;
+}
+
+// --------------------------- 테이블 리스트 --------------------------- //
+.table_wrap {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+
+  table {
+    width: 100%;
+  }
+
+  thead th {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    box-sizing: border-box;
+    text-align: left;
+    background: var(--bg-lightGray);
+    border-bottom: 2px solid var(--line-default);
+  }
+
+  td {
+    position: relative;
+    padding: 15px 10px;
+    font-size: 16px;
+    font-weight: 400;
+    border-bottom: 1px solid var(--line-default);
+    box-sizing: border-box;
+  }
+
+  tbody {
+    // 테이블데이터 선택 hover 공통 규칙
+    tr:hover th,
+    tr:hover td {
+      background-color: var(--bg-lightGray);
+    }
+  }
 }
 
 // --------------------------- 팝업 --------------------------- //
