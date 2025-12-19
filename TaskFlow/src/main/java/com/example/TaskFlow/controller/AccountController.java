@@ -2,7 +2,6 @@ package com.example.TaskFlow.controller;
 
 import com.example.TaskFlow.common.conf.PathConf;
 import com.example.TaskFlow.common.error.ErrorCode;
-import com.example.TaskFlow.define.TaskDefine;
 import com.example.TaskFlow.model.request.AuthenticationRequest;
 import com.example.TaskFlow.model.request.SignUpRequest;
 import com.example.TaskFlow.model.response.account.LoginResponse;
@@ -10,7 +9,6 @@ import com.example.TaskFlow.model.response.common.ApiResponse;
 import com.example.TaskFlow.service.AccountService;
 import com.example.TaskFlow.utils.ApiResponseUtil;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +45,20 @@ public class AccountController {
         boolean exists = accountService.existsByLoginId(loginId);
 
         return ApiResponseUtil.ok(exists);
+    }
+
+    @Operation(summary = "로그아웃", description = "로그아웃 처리")
+    @PostMapping(PathConf.LOGOUT)
+    public ResponseEntity<ApiResponse<Void>> logout() {
+
+        ApiResponse<Void> body = ApiResponse.<Void>builder()
+                .status(String.valueOf(HttpStatus.OK.value()))
+                .code(ErrorCode.SUCCESS.getCode())
+                .message("로그아웃 완료")
+                .data(null)
+                .build();
+
+        return ResponseEntity.ok(body);
     }
 
     @Operation(summary = "회원가입", description = "회원가입")
