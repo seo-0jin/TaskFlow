@@ -185,12 +185,9 @@
 
 // --------------------------- Main --------------------------- //
 .mainContent {
-  // position: relative;
   width: 100%;
-  // height: calc(100% - 80px - 40px); // 헤더 + 푸터 뺀 높이
   height: 100%;
   padding-top: 80px; // 헤더만큼 띄우기
-  // padding-bottom: 40px; // 푸터만큼
   display: flex;
 }
 
@@ -202,20 +199,41 @@
 
   table {
     width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  tbody {
+    display: block;
+    max-height: 400px;
+    overflow-y: auto;
+    width: 100%;
+  }
+
+  tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
   }
 
   thead th {
-    padding: 10px;
+    padding: 15px 10px;
     font-size: 16px;
     font-weight: 600;
-    box-sizing: border-box;
     text-align: left;
-    background: var(--bg-lightGray);
     border-bottom: 2px solid var(--line-default);
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 1;
   }
 
   td {
-    position: relative;
     padding: 15px 10px;
     font-size: 16px;
     font-weight: 400;
@@ -223,12 +241,21 @@
     box-sizing: border-box;
   }
 
-  tbody {
-    // 테이블데이터 선택 hover 공통 규칙
-    tr:hover th,
-    tr:hover td {
-      background-color: var(--bg-lightGray);
-    }
+  tbody tr:hover td {
+    background-color: var(--bg-lightGray);
+  }
+}
+
+// --------------------------- Pagination --------------------------- //
+.pagination_container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 }
 

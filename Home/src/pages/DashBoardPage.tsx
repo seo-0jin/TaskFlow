@@ -9,7 +9,7 @@ import {
 } from "../viewmodels/useDashBoardViewModel";
 import TableComp, { type TableColumn } from "../components/table/TableComp";
 import { IssueStatusColor, IssueStatusLabel } from "../const/IssueStatus";
-import StatusBadge from "../components/StatusBadge";
+import StatusBadge from "../components/badge/StatusBadge";
 import { SummaryType } from "../const/SummaryType";
 import HorizontalBarChart, {
   type BarDatum,

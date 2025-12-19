@@ -22,7 +22,7 @@ const Button = ({
   showArrow = false,
   onClick,
   type = "button",
-  hidden = false,
+  hidden = false, // 조건에 따라 버튼 hidden
 }: ButtonProps) => {
   const isText = variant === "text";
   const hiddenClass = hidden ? styles.hidden : "";

@@ -67,22 +67,17 @@
       font-weight: 400;
       color: rgba(0, 0, 0, 0.7);
 
-      .sidebar_item_button {
-        display: inline-block;
-        width: 100%;
-        padding: 10px 30px;
-        box-sizing: border-box;
-        // color: var(--palette-gray-darkGray3);
+      display: inline-block;
+      width: 100%;
+      padding: 10px 30px;
+      box-sizing: border-box;
+      text-decoration: none;
 
-        &:visited {
-          color: rgba(0, 0, 0, 0.9);
-          font-weight: bold;
-        }
-
-        &.on,
-        &:hover {
-          @include item_hover();
-        }
+      &.on,
+      &:hover {
+        @include item_hover();
+        color: rgba(0, 0, 0, 0.95);
+        font-weight: 600;
       }
 
       .sidebar_item_count {

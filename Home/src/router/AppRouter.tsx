@@ -9,6 +9,7 @@ import MainLayout from "../layout/MainLayout";
 import LayoutWithSidebar from "../layout/LayoutWithSidebar";
 import { useAuthStore } from "../store/useAuthStore";
 import { useEffect } from "react";
+import ProjectTemplates from "../pages/system/ProjectTemplates";
 
 export default function AppRouter() {
   const hydrate = useAuthStore((s) => s.hydrate);
@@ -51,8 +52,9 @@ export default function AppRouter() {
           >
             {/* 대시보드 */}
             <Route path={RoutePath.DASHBOARD} element={<DashBoardPage />} />
-            {/* 추후 페이지들 여기로 */}
-            {/* <Route path={RoutePath.ISSUES} element={<IssueListPage />} /> */}
+
+            {/* 시스템 관리 */}
+            <Route path={RoutePath.system_TEMPLATE} element={<ProjectTemplates />} />
           </Route>
 
           {/* 보호된 페이지 (로그인 필요) */}

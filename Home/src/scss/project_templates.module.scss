@@ -1,0 +1,35 @@
+.project_templates {
+  height: 100%;
+  width: 100%;
+
+  padding: 30px;
+
+  .top_content {
+    text-align: right;
+    padding-bottom: 30px;
+  }
+
+  .content_area {
+    height: calc(100% - 40px);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    .table_area {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+      padding-bottom: 60px;
+    }
+
+    .pagination_area {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 12px 0 10px;
+      border-top: 2px solid var(--line-default);
+    }
+  }
+}
