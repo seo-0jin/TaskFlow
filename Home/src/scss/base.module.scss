@@ -1,7 +1,15 @@
+@use "base_mixin" as *;
+
 :global(.error-font) {
   color: var(--error-color);
   margin-top: 8px;
   font-size: 16px;
+}
+
+:global(.ellipsis_data) {
+  display: block;
+  max-width: 98%;
+  @include ellipsis();
 }
 
 .hidden {
@@ -177,12 +185,13 @@
 
 // --------------------------- Main --------------------------- //
 .mainContent {
-  position: relative;
+  // position: relative;
   width: 100%;
   // height: calc(100% - 80px - 40px); // 헤더 + 푸터 뺀 높이
   height: 100%;
   padding-top: 80px; // 헤더만큼 띄우기
-  padding-bottom: 40px;
+  // padding-bottom: 40px; // 푸터만큼
+  display: flex;
 }
 
 // --------------------------- 테이블 리스트 --------------------------- //

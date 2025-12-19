@@ -6,7 +6,7 @@ const SidebarLayout = () => {
       <div className={styles.sidebar_box}>
         <ul className={styles.sidebar_subgroup}>
           <h2 className={styles.sidebar_subheader}>프로젝트</h2>
-          <li className={styles.sidebar_item}>새 프로젝트 생성</li>
+          <li className={styles.sidebar_item}>새 프로젝트 생성</li> {/* 권한 있는 사람만 보이도록 */}
           <li className={styles.sidebar_item}>이슈 관리</li>
           <li className={styles.sidebar_item}>일정 / 진행상황</li>
           <li className={styles.sidebar_item}>문서 / 설명</li>
@@ -20,6 +20,7 @@ const SidebarLayout = () => {
         </ul>
         <div className={styles.sidebar_divider}></div>
         <ul className={styles.sidebar_subgroup}>
+          {/* 권한 있는 사람만 보이도록 */}
           <h2 className={styles.sidebar_subheader}>시스템 관리</h2>
           <li className={styles.sidebar_item}>사용자 관리</li>
           <li className={styles.sidebar_item}>역할 / 권한</li>

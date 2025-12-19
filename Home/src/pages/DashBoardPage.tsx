@@ -45,7 +45,13 @@ const DashBoardPage = () => {
       title: "이슈 제목",
       width: "50%",
       render: (row) => (
-        <span style={{ cursor: "pointer", fontWeight: 500 }}>{row.title}</span>
+        <span
+          className="ellipsis_data"
+          title={row.title}
+          style={{ cursor: "pointer", fontWeight: 500 }}
+        >
+          {row.title}
+        </span>
       ),
     },
     {
@@ -85,92 +91,96 @@ const DashBoardPage = () => {
 
   return (
     <section className={styles.dashboard}>
-      {/* 전체 프로젝트 이슈 현황 */}
-      <div className={styles.issue_status_wrap}>
-        <div className={styles.title_wrap}>
-          <p className={styles.title}>전체 이슈 현황</p>
-          <p className={styles.issue_description}>
-            등록된 모든 프로젝트의 이슈를 요약해 보여줍니다.
-          </p>
-        </div>
-        <ul>
-          <li
-            className={styles.li_item}
-            onClick={() => onClickSummary(SummaryType.DUE_TODAY)}
-          >
-            <div>
-              <h2 className={styles.title}>오늘 마감</h2>
+      <div className={styles.main_area}>
+        {/* 전체 프로젝트 이슈 현황 */}
+        <div className={styles.contents_wrap}>
+          <div className={styles.issue_status_wrap}>
+            <div className={styles.title_wrap}>
+              <p className={styles.title}>전체 이슈 현황</p>
+              <p className={styles.issue_description}>
+                등록된 모든 프로젝트의 이슈를 요약해 보여줍니다.
+              </p>
             </div>
-            <div className={styles.count}>
-              <span>{dueTodayCount}</span>
-            </div>
-          </li>
-          <li
-            className={styles.li_item}
-            onClick={() => onClickSummary(SummaryType.IN_PROGRESS)}
-          >
-            <div>
-              <h2 className={styles.title}>진행 중</h2>
-            </div>
-            <div className={styles.count}>
-              <span>{inProgressCount}</span>
-            </div>
-          </li>
-          <li
-            className={styles.li_item}
-            onClick={() => onClickSummary(SummaryType.UNASSIGNED)}
-          >
-            <div>
-              <h2 className={styles.title}>미지정</h2>
-            </div>
-            <div className={styles.count}>
-              <span>{unassignedCount}</span>
-            </div>
-          </li>
-          <li
-            className={styles.li_item}
-            onClick={() => onClickSummary(SummaryType.DONE_7D)}
-          >
-            <div>
-              <h2 className={styles.title}>최근 7일 완료</h2>
-            </div>
-            <div className={styles.count}>
-              <span>{doneLast7DaysCount}</span>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      {/* 전체 프로젝트 Chart */}
-      <div className={styles.chart_wrap}>
-        <div className={styles.title_wrap}>
-          <h1 className={styles.title}>전체 프로젝트 현황</h1>
-        </div>
-        <div className={styles.bar_chart_wrap}>
-          <div className={styles.bar_chart}>
-            <h2 className={styles.title}>이슈 상태 분포</h2>
-            <HorizontalBarChart
-              data={toIssueStatusBarData(issueStatusChart)}
-              showValueLabel
-            />
-          </div>
-          <div className={styles.bar_chart}>
-            <h2 className={styles.title}>프로젝트 진행 현황</h2>
-            <HorizontalBarChart
-              data={toProjectProgressBarData(projectProgress)}
-              showValueLabel
-            />
+            <ul>
+              <li
+                className={styles.li_item}
+                onClick={() => onClickSummary(SummaryType.DUE_TODAY)}
+              >
+                <div>
+                  <h2 className={styles.title}>오늘 마감</h2>
+                </div>
+                <div className={styles.count}>
+                  <span>{dueTodayCount}</span>
+                </div>
+              </li>
+              <li
+                className={styles.li_item}
+                onClick={() => onClickSummary(SummaryType.IN_PROGRESS)}
+              >
+                <div>
+                  <h2 className={styles.title}>진행 중</h2>
+                </div>
+                <div className={styles.count}>
+                  <span>{inProgressCount}</span>
+                </div>
+              </li>
+              <li
+                className={styles.li_item}
+                onClick={() => onClickSummary(SummaryType.UNASSIGNED)}
+              >
+                <div>
+                  <h2 className={styles.title}>미지정</h2>
+                </div>
+                <div className={styles.count}>
+                  <span>{unassignedCount}</span>
+                </div>
+              </li>
+              <li
+                className={styles.li_item}
+                onClick={() => onClickSummary(SummaryType.DONE_7D)}
+              >
+                <div>
+                  <h2 className={styles.title}>최근 7일 완료</h2>
+                </div>
+                <div className={styles.count}>
+                  <span>{doneLast7DaysCount}</span>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
 
-      <div className={styles.recent_wrap}>
-        <h2 className={styles.title}>최근 업데이트된 이슈 (Top 10)</h2>
-        <TableComp
-          columns={recentIssueColumns}
-          data={recentIssues}
-          rowKey={(row) => row.issueId}
-        />
+        {/* 전체 프로젝트 Chart */}
+        <div className={styles.chart_wrap}>
+          <div className={styles.title_wrap}>
+            <h1 className={styles.title}>전체 프로젝트 현황</h1>
+          </div>
+          <div className={styles.bar_chart_wrap}>
+            <div className={styles.bar_chart}>
+              <h2 className={styles.title}>이슈 상태 분포</h2>
+              <HorizontalBarChart
+                data={toIssueStatusBarData(issueStatusChart)}
+                showValueLabel
+              />
+            </div>
+            <div className={styles.bar_chart}>
+              <h2 className={styles.title}>프로젝트 진행 현황</h2>
+              <HorizontalBarChart
+                data={toProjectProgressBarData(projectProgress)}
+                showValueLabel
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.recent_wrap}>
+          <h2 className={styles.title}>최근 업데이트된 이슈 (Top 10)</h2>
+          <TableComp
+            columns={recentIssueColumns}
+            data={recentIssues}
+            rowKey={(row) => row.issueId}
+          />
+        </div>
       </div>
     </section>
   );

@@ -41,8 +41,6 @@ export default function AppRouter() {
           {/* 로그인 페이지 */}
           <Route path={RoutePath.LOGIN} element={<AuthPage />} />
 
-          {/* 대시보드 */}
-          <Route path={RoutePath.DASHBOARD} element={<DashBoardPage />} />
           {/* 사이드바 포함 보호 영역 */}
           <Route
             element={
@@ -51,6 +49,8 @@ export default function AppRouter() {
               </PrivateRoute>
             }
           >
+            {/* 대시보드 */}
+            <Route path={RoutePath.DASHBOARD} element={<DashBoardPage />} />
             {/* 추후 페이지들 여기로 */}
             {/* <Route path={RoutePath.ISSUES} element={<IssueListPage />} /> */}
           </Route>

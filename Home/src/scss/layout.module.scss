@@ -32,7 +32,7 @@
 
 // --------------------------- Sidebar --------------------------- //
 .sidebar_container {
-  position: relative;
+  // position: relative;
   z-index: 10;
   display: block;
   width: 260px;
@@ -108,18 +108,26 @@
   }
 }
 
+// --------------------------- Main Contents --------------------------- //
+.content_area {
+  width: 100%;
+  padding-bottom: 40px; // 푸터만큼
+}
+
 // --------------------------- Footer --------------------------- //
 .footer {
   position: fixed;
   bottom: 0;
-  left: 0;
+  right: 0;
   padding: 8px 12px;
   height: 40px;
-  width: 100%;
+  // width: 100%;
+  width: calc(100% - 260px);
   display: flex;
   align-items: center;
   font-size: 11px;
   font-weight: 400;
+  border-top: 2px solide var(--line-default);
 }
 
 // --------------------------- Login --------------------------- //

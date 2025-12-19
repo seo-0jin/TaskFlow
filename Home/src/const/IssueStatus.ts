@@ -17,7 +17,7 @@ export const IssueStatusLabel: Record<IssueStatusValue, string> = {
 
 // 사용 예시 > {IssueStatusColor[TODO]}
 export const IssueStatusColor: Record<IssueStatusValue, string> = {
-    TODO: "#64748B",
+    TODO: "#475569",
     IN_PROGRESS: "#3B82F6",
     DONE: "#22C55E",
     OVERDUE: "#EF4444",

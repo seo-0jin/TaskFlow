@@ -1,5 +1,11 @@
 @mixin item_hover {
-    color: rgb(54, 54, 54);
-    background-color: rgba(237, 240, 243, 0.6);
-    border-radius: 7px;
+  color: rgb(54, 54, 54);
+  background-color: rgba(237, 240, 243, 0.6);
+  border-radius: 7px;
+}
+
+@mixin ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
