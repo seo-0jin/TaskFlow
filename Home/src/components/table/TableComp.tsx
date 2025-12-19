@@ -19,12 +19,16 @@ const TableComp = <T,>({ columns, data, rowKey }: TableProps<T>) => {
   return (
     <div className={styles.table_wrap}>
       <table>
+        <colgroup>
+          {columns.map((col) => (
+            <col key={col.key} style={{ width: col.width }} />
+          ))}
+        </colgroup>
+
         <thead>
           <tr>
             {columns.map((col) => (
-              <th key={col.key} style={{ width: col.width }}>
-                {col.title}
-              </th>
+              <th key={col.key}>{col.title}</th>
             ))}
           </tr>
         </thead>

@@ -1,6 +1,5 @@
 // src/router/AppRouter.tsx
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
 import { RoutePath } from "../const/RoutePath";
 import AuthPage from "../pages/AuthPage";
 import PrivateRoute from "./PrivateRoute";
@@ -9,7 +8,7 @@ import MainLayout from "../layout/MainLayout";
 import LayoutWithSidebar from "../layout/LayoutWithSidebar";
 import { useAuthStore } from "../store/useAuthStore";
 import { useEffect } from "react";
-import ProjectTemplates from "../pages/system/ProjectTemplates";
+import ProjectTemplatePage from "../pages/system/ProjectTemplatePage";
 
 export default function AppRouter() {
   const hydrate = useAuthStore((s) => s.hydrate);
@@ -54,7 +53,7 @@ export default function AppRouter() {
             <Route path={RoutePath.DASHBOARD} element={<DashBoardPage />} />
 
             {/* 시스템 관리 */}
-            <Route path={RoutePath.system_TEMPLATE} element={<ProjectTemplates />} />
+            <Route path={RoutePath.system_TEMPLATE} element={<ProjectTemplatePage />} />
           </Route>
 
           {/* 보호된 페이지 (로그인 필요) */}

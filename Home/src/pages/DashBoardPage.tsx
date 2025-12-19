@@ -43,7 +43,7 @@ const DashBoardPage = () => {
     {
       key: "title",
       title: "이슈 제목",
-      width: "50%",
+      width: "40%",
       render: (row) => (
         <span
           className="ellipsis_data"
@@ -57,7 +57,7 @@ const DashBoardPage = () => {
     {
       key: "projectName",
       title: "프로젝트",
-      width: "20%",
+      width: "25%",
     },
     {
       key: "status",
@@ -68,7 +68,7 @@ const DashBoardPage = () => {
     {
       key: "updatedAt",
       title: "업데이트",
-      width: "20%",
+      width: "25%",
       render: (row) => new Date(row.updatedAt).toLocaleString("ko-KR"),
     },
   ];

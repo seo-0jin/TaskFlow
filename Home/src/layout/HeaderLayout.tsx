@@ -13,12 +13,16 @@ const HeaderLayout = () => {
     navigate("/login", { replace: true });
   };
 
+  const goToDashBoard = () => {
+    navigate("/dashboard", { replace: true });
+  }
+
   const user = useAuthStore((s) => s.user);
 
   return (
     <header className={styles.header}>
       <div className={styles.header_left}>
-        <img src="/public/icons/project-pulse-logo.png" alt="" />
+        <img src="/public/icons/project-pulse-logo.png" alt="" onClick={goToDashBoard}/>
       </div>
       <div className={styles.header_right}>
         <Button

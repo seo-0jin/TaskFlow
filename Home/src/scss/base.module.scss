@@ -189,6 +189,7 @@
   height: 100%;
   padding-top: 80px; // 헤더만큼 띄우기
   display: flex;
+  justify-content: center;
 }
 
 // --------------------------- 테이블 리스트 --------------------------- //
@@ -200,23 +201,24 @@
   table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
   }
 
   thead {
-    display: table;
+    // display: table;
     width: 100%;
     table-layout: fixed;
   }
 
   tbody {
-    display: block;
+    // display: block;
     max-height: 400px;
     overflow-y: auto;
     width: 100%;
   }
 
   tbody tr {
-    display: table;
+    // display: table;
     width: 100%;
     table-layout: fixed;
   }

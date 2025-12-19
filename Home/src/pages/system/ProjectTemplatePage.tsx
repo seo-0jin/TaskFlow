@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { usePagination } from "../../hooks/usePagination";
 import { ProjectTemplate } from "../../const/table/ProjectTemplate";
 
-const ProjectTemplates = () => {
+const ProjectTemplatePage = () => {
   // 테이블에 들어갈 columns
   const projectTemplateColumns: TableColumn<ProjectTemplateDto>[] = [
     {
@@ -129,4 +129,4 @@ const ProjectTemplates = () => {
   );
 };
 
-export default ProjectTemplates;
+export default ProjectTemplatePage;
