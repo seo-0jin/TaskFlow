@@ -1,4 +1,4 @@
-package com.example.TaskFlow.config;
+package com.example.TaskFlow.config.mybatis;
 
 import com.example.TaskFlow.mybatis.handler.AccountConfigKeyHandler;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -34,7 +34,9 @@ public class MyBatisConfig {
         // 수동 등록
         // @formatter:off
         sqlSessionFactoryBean.setTypeHandlers(
-                new AccountConfigKeyHandler());
+                new AccountConfigKeyHandler(),
+                new TemplateConfigJsonTypeHandler()
+        );
         // @formatter:on
 
         sqlSessionFactoryBean.setMapperLocations(
