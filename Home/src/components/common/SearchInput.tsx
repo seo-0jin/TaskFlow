@@ -8,24 +8,16 @@ type SearchInputProps = {
   error?: string | null;
 };
 
-export const SearchInput = ({
-  label,
-  value,
-  onChange,
-  onSearch,
-  type,
-  placeholder,
-  error,
-}: SearchInputProps) => {
+export const SearchInput = ({ label, value, onChange, onSearch, type, placeholder, error }: SearchInputProps) => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       onSearch();
     }
   };
 
   return (
-    <div className="search-input">
-      {label && <label className="form-label">{label}</label>}
+    <div className='search-input'>
+      {label && <label className='form-label'>{label}</label>}
       <input
         value={value}
         type={type}
@@ -33,8 +25,8 @@ export const SearchInput = ({
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
       />
-      {error && <div className="form-error">{error}</div>}
-      <button type="button" onClick={onSearch}>
+      {error && <div className='form-error'>{error}</div>}
+      <button type='button' onClick={onSearch}>
         검색
       </button>
     </div>

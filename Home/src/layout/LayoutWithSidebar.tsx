@@ -1,6 +1,6 @@
-import { Outlet } from "react-router-dom";
-import SidebarLayout from "./SidebarLayout";
-import styles from "@/scss/layout.module.scss";
+import { Outlet } from 'react-router-dom';
+import SidebarLayout from './SidebarLayout';
+import styles from '@/scss/layout.module.scss';
 
 const LayoutWithSidebar = () => {
   return (

@@ -1,9 +1,9 @@
 // PrivateRoute.tsx
 
-import type { ReactNode } from "react";
-import { Navigate } from "react-router-dom";
-import { RoutePath } from "../const/RoutePath";
-import { useAuthStore } from "../store/useAuthStore";
+import type { ReactNode } from 'react';
+import { Navigate } from 'react-router-dom';
+import { RoutePath } from '../const/RoutePath';
+import { useAuthStore } from '../store/useAuthStore';
 
 interface PrivateRouteProps {
   children: ReactNode;

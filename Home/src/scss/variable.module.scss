@@ -1,15 +1,28 @@
 :root {
+  // 버튼 컬러
   --btn-black: #151515;
   --btn-gray: #999;
   --hovered-color: #c84747;
 
+  // 에러 컬러
   --error-color: #cd0a0a;
 
+  // 폰트 컬러
   --font-default: #37383f;
   --font-white: #fff;
+  --font-purple: #4F46E5;
+  --font-muted: #64748B;
 
+  // 라인 컬러
   --line-default: #e5e5e5;
+  --line-dark: #37383f5b;
+  --line-black: #151515;
+  --line-purple: #4F46E5;
+  --line-purple-dark: #6366F1;
+  --line-purple-light: #818CF8;
 
+  // 백그라운드 컬러
   --bg-default: #37383F;
   --bg-lightGray: #F8F9F9;
+  --bg-purple-light: #818df80e;
 }

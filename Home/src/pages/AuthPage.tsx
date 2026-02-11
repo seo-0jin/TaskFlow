@@ -1,14 +1,14 @@
-import { useEffect, useState, type FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLoginViewModel } from "../viewmodels/useLoginViewModel";
-import styles from "@/scss/login.module.scss";
-import AuthLayout from "../layout/AuthLayout";
-import { useSignUpViewModel } from "../viewmodels/useSignUpViewModel";
-import { AlertPopup } from "../components/popup/AlertPopup";
-import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import { useEffect, useState, type FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useLoginVM } from '../viewmodels/useLoginVM';
+import styles from '@/scss/login.module.scss';
+import AuthLayout from '../layout/AuthLayout';
+import { useSignUpVM } from '../viewmodels/useSignUpVM';
+import { AlertPopup } from '../components/popup/AlertPopup';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 const AuthPage = () => {
-  useDocumentTitle("시작하기");
+  useDocumentTitle('시작하기');
 
   const navigate = useNavigate();
   const {
@@ -16,7 +16,7 @@ const AuthPage = () => {
     setLoginId: setLoginFormLoginId,
     setPassword: setLoginFormPassword,
     submit: submitLogin,
-  } = useLoginViewModel();
+  } = useLoginVM();
 
   const {
     state: signUpState,
@@ -26,19 +26,19 @@ const AuthPage = () => {
     setEmail: setSignUpEmail,
     setPhone: setSignUpPhone,
     submit: submitSignUp,
-  } = useSignUpViewModel();
+  } = useSignUpVM();
 
   const [isSignUpMode, setIsSignUpMode] = useState(false);
 
   const [alertOpen, setAlertOpen] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
+  const [alertMessage, setAlertMessage] = useState('');
 
   const handleSubmitLogin = async (e: FormEvent) => {
     e.preventDefault();
     const user = await submitLogin();
 
     if (user) {
-      navigate("/dashboard");
+      navigate('/dashboard');
     }
   };
 
@@ -47,7 +47,7 @@ const AuthPage = () => {
     const ok = await submitSignUp();
 
     if (ok) {
-      setAlertMessage("회원가입이 완료되었습니다.");
+      setAlertMessage('회원가입이 완료되었습니다.');
       setAlertOpen(true);
     }
   };
@@ -59,9 +59,9 @@ const AuthPage = () => {
 
   // 로그인 페이지에서만 사용되는 아이콘
   useEffect(() => {
-    const link = document.createElement("link");
-    link.href = "https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css";
-    link.rel = "stylesheet";
+    const link = document.createElement('link');
+    link.href = 'https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css';
+    link.rel = 'stylesheet';
     document.head.appendChild(link);
 
     return () => {
@@ -72,63 +72,53 @@ const AuthPage = () => {
   return (
     <AuthLayout>
       <div className={styles.login}>
-        <div className={styles["login__content"]}>
-          <div className={styles["login__img"]}>
+        <div className={styles['login__content']}>
+          <div className={styles['login__img']}>
             <img
-              src="https://image.freepik.com/free-vector/code-typing-concept-illustration_114360-3581.jpg"
-              alt="user login"
+              src='https://image.freepik.com/free-vector/code-typing-concept-illustration_114360-3581.jpg'
+              alt='user login'
             />
           </div>
-          <div className={styles["login__forms"]}>
+          <div className={styles['login__forms']}>
             {/* 로그인 폼 */}
             <form
-              className={`${styles["login__register"]} ${
-                isSignUpMode ? styles.none : styles.block
-              }`}
+              className={`${styles['login__register']} ${isSignUpMode ? styles.none : styles.block}`}
               onSubmit={handleSubmitLogin}
             >
-              <h1 className={styles["login__title"]}>로그인</h1>
-              <div className={styles["login__box"]}>
-                <i className={`bx bx-user ${styles["login__icon"]}`}></i>
+              <h1 className={styles['login__title']}>로그인</h1>
+              <div className={styles['login__box']}>
+                <i className={`bx bx-user ${styles['login__icon']}`}></i>
                 <input
-                  type="text"
-                  placeholder="User ID"
-                  className={styles["login__input"]}
+                  type='text'
+                  placeholder='User ID'
+                  className={styles['login__input']}
                   value={loginState.loginId}
                   onChange={(e) => setLoginFormLoginId(e.target.value)}
                 />
               </div>
-              <div className={styles["login__box"]}>
-                <i className={`bx bx-lock ${styles["login__icon"]}`}></i>
+              <div className={styles['login__box']}>
+                <i className={`bx bx-lock ${styles['login__icon']}`}></i>
                 <input
-                  type="password"
-                  placeholder="Password"
-                  className={styles["login__input"]}
+                  type='password'
+                  placeholder='Password'
+                  className={styles['login__input']}
                   value={loginState.password}
                   onChange={(e) => setLoginFormPassword(e.target.value)}
                 />
               </div>
 
-              {loginState.error && (
-                <p className="error-font">{loginState.error}</p>
-              )}
+              {loginState.error && <p className='error-font'>{loginState.error}</p>}
 
-              <button
-                type="submit"
-                className={styles["login__button"]}
-                disabled={loginState.loading}
-              >
+              <button type='submit' className={styles['login__button']} disabled={loginState.loading}>
                 로그인
               </button>
 
-              <div className={styles["login__gap"]}>
-                <span
-                  className={`${styles["login__account"]} ${styles["login__account--account"]}`}
-                >
+              <div className={styles['login__gap']}>
+                <span className={`${styles['login__account']} ${styles['login__account--account']}`}>
                   계정이 없으신가요?
                 </span>
                 <span
-                  className={`${styles["login__signin"]} ${styles["login__signin--signup"]}`}
+                  className={`${styles['login__signin']} ${styles['login__signin--signup']}`}
                   onClick={() => setIsSignUpMode(true)}
                 >
                   계정 생성
@@ -138,87 +128,79 @@ const AuthPage = () => {
 
             {/* 회원가입 폼 */}
             <form
-              className={`${styles["login__create"]} ${
-                isSignUpMode ? styles.block : styles.none
-              }`}
+              className={`${styles['login__create']} ${isSignUpMode ? styles.block : styles.none}`}
               onSubmit={handleSubmitSignUp}
             >
-              <h1 className={styles["login__title"]}>계정 생성</h1>
-              <div className={styles["login__box"]}>
-                <i className={`bx bx-user ${styles["login__icon"]}`}></i>
+              <h1 className={styles['login__title']}>계정 생성</h1>
+              <div className={styles['login__box']}>
+                <i className={`bx bx-user ${styles['login__icon']}`}></i>
                 <input
-                  type="text"
-                  placeholder="User ID"
-                  className={styles["login__input"]}
+                  type='text'
+                  placeholder='User ID'
+                  className={styles['login__input']}
                   value={signUpState.loginId}
                   onChange={(e) => setSignUpLoginId(e.target.value)}
                 />
               </div>
 
-              {signUpState.loginIdError && (
-                <p className="error-font">{signUpState.loginIdError}</p>
-              )}
+              {signUpState.loginIdError && <p className='error-font'>{signUpState.loginIdError}</p>}
 
-              <div className={styles["login__box"]}>
-                <i className={`bx bx-lock ${styles["login__icon"]}`}></i>
+              <div className={styles['login__box']}>
+                <i className={`bx bx-lock ${styles['login__icon']}`}></i>
                 <input
-                  type="password"
-                  placeholder="Password"
-                  className={styles["login__input"]}
+                  type='password'
+                  placeholder='Password'
+                  className={styles['login__input']}
                   value={signUpState.password}
                   onChange={(e) => setSignUpPassword(e.target.value)}
                 />
               </div>
 
-              <div className={styles["login__box"]}>
-                <i className={`bx bx-at ${styles["login__icon"]}`}></i>
+              <div className={styles['login__box']}>
+                <i className={`bx bx-at ${styles['login__icon']}`}></i>
                 <input
-                  type="text"
-                  placeholder="Name"
-                  className={styles["login__input"]}
+                  type='text'
+                  placeholder='Name'
+                  className={styles['login__input']}
                   value={signUpState.name}
                   onChange={(e) => setSignUpName(e.target.value)}
                 />
               </div>
 
-              <div className={styles["login__box"]}>
-                <i className={`bx bx-at ${styles["login__icon"]}`}></i>
+              <div className={styles['login__box']}>
+                <i className={`bx bx-at ${styles['login__icon']}`}></i>
                 <input
-                  type="email"
-                  placeholder="Email"
-                  className={styles["login__input"]}
+                  type='email'
+                  placeholder='Email'
+                  className={styles['login__input']}
                   value={signUpState.email}
                   onChange={(e) => setSignUpEmail(e.target.value)}
                 />
               </div>
 
-              {signUpState.emailError && (
-                <p className="error-font">{signUpState.emailError}</p>
-              )}
+              {signUpState.emailError && <p className='error-font'>{signUpState.emailError}</p>}
 
-              <div className={styles["login__box"]}>
-                <i className={`bx bx-at ${styles["login__icon"]}`}></i>
+              <div className={styles['login__box']}>
+                <i className={`bx bx-at ${styles['login__icon']}`}></i>
                 <input
-                  type="text"
-                  placeholder="Phone"
-                  className={styles["login__input"]}
+                  type='text'
+                  placeholder='Phone'
+                  className={styles['login__input']}
                   value={signUpState.phone}
                   onChange={(e) => setSignUpPhone(e.target.value)}
                 />
               </div>
 
-              <button type="submit" className={styles["login__button"]}>
+              <button type='submit' className={styles['login__button']}>
                 계정 생성
               </button>
 
-              <div className={styles["login__gap"]}>
-                <span
-                  className={`${styles["login__account"]} ${styles["login__account--account"]}`}
-                >
+              <div className={styles['login__gap']}>
+                <span className={`${styles['login__account']} ${styles['login__account--account']}`}>
                   이미 계정이 있으신가요?
                 </span>
                 <span
-                  className={`${styles["login__signup"]} ${styles["login__signup--signup"]}`}
+                  className={`${styles['login__signup']} ${styles['login__signup--signup']}`}
                   onClick={() => setIsSignUpMode(false)}
                 >
                   로그인
@@ -227,11 +209,7 @@ const AuthPage = () => {
             </form>
 
             {/* 회원가입 성공 알림 팝업 */}
-            <AlertPopup
-              open={alertOpen}
-              message={alertMessage}
-              onClick={handleConfirmAlert}
-            />
+            <AlertPopup open={alertOpen} message={alertMessage} onClick={handleConfirmAlert} />
           </div>
         </div>
       </div>

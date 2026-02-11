@@ -18,6 +18,10 @@
   }
 }
 
+.badge+.badge {
+  margin-left: 4px;
+}
+
 .badge_wrap {
   display: flex;
   gap: 6px;

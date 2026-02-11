@@ -60,8 +60,7 @@ export interface DashBoardViewModel {
     onClickIssue: (issueId: string) => void;
 }
 
-
-export const useDashBoardViewModel = (): DashBoardViewModel => {
+export const useDashBoardVM = (): DashBoardViewModel => {
     const [state, setState] = useState<DashBoardState>({
         loading: true,
 

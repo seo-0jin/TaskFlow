@@ -4,7 +4,7 @@ import type { SignUpRequest } from "../data/request/SignUpRequest";
 import axios, { AxiosError } from "axios";
 import type { ApiResponse } from "../data/response/common/ApiResponse";
 
-export const useSignUpViewModel = () => {
+export const useSignUpVM = () => {
     const [state, setState] = useState({
         loginId: "",
         password: "",

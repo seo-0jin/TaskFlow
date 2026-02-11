@@ -4,7 +4,7 @@
  */
 export const isEmpty = (value: unknown): boolean => {
     if (value === null || value === undefined) return true;
-    if (typeof value !== "string") return false;
+    if (typeof value !== 'string') return false;
     return value.trim().length === 0;
 };
 
@@ -12,6 +12,6 @@ export const isEmpty = (value: unknown): boolean => {
  * 문자열 좌우 공백 제거 (null/undefined 안전 처리)
  */
 export const trim = (value: unknown): string => {
-    if (typeof value !== "string") return "";
+    if (typeof value !== 'string') return '';
     return value.trim();
 };

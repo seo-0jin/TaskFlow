@@ -1,7 +1,7 @@
-import type { LoginResponse } from "../data/response/LoginResponse";
+import type { LoginResponse } from '../data/response/LoginResponse';
 
-const USER_KEY = "user";
-const TOKEN_KEY = "token";
+const USER_KEY = 'user';
+const TOKEN_KEY = 'token';
 
 export const saveUser = (user: LoginResponse) => {
   sessionStorage.setItem(USER_KEY, JSON.stringify(user));

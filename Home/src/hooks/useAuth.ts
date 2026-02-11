@@ -1,5 +1,4 @@
-// src/hooks/useAuth.ts
-import { useAuthStore } from "../store/useAuthStore";
+import { useAuthStore } from '../store/useAuthStore';
 
 export const useAuth = () => {
   const user = useAuthStore((s) => s.user);

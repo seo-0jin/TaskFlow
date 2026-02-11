@@ -20,7 +20,7 @@ export interface LoginViewModel {
     submit: () => Promise<LoginResponse | null>;
 }
 
-export const useLoginViewModel = (): LoginViewModel => {
+export const useLoginVM = (): LoginViewModel => {
     const [state, setState] = useState<LoginFormState>({
         loginId: "",
         password: "",

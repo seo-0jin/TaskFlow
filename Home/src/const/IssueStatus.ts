@@ -24,5 +24,20 @@ export const IssueStatusColor: Record<IssueStatusValue, string> = {
     ON_HOLD: "#F59E0B"
 };
 
+// 템플릿 생성시 필요한 type
+export type ItemContent = {
+    id: string;
+    name: string;
+    color: string;
+};
+
+export const buildDefaultIssueStatusItems = (): ItemContent[] => ([
+    { id: crypto.randomUUID(), name: IssueStatusLabel.TODO, color: IssueStatusColor.TODO },
+    { id: crypto.randomUUID(), name: IssueStatusLabel.IN_PROGRESS, color: IssueStatusColor.IN_PROGRESS },
+    { id: crypto.randomUUID(), name: IssueStatusLabel.DONE, color: IssueStatusColor.DONE },
+    { id: crypto.randomUUID(), name: IssueStatusLabel.OVERDUE, color: IssueStatusColor.OVERDUE },
+    { id: crypto.randomUUID(), name: IssueStatusLabel.ON_HOLD, color: IssueStatusColor.ON_HOLD },
+]);
+
 export type IssueStatusKey = keyof typeof IssueStatus;
 export type IssueStatusValue = (typeof IssueStatus)[IssueStatusKey];

@@ -1,14 +1,14 @@
 // src/router/AppRouter.tsx
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { RoutePath } from "../const/RoutePath";
-import AuthPage from "../pages/AuthPage";
-import PrivateRoute from "./PrivateRoute";
-import DashBoardPage from "../pages/DashBoardPage";
-import MainLayout from "../layout/MainLayout";
-import LayoutWithSidebar from "../layout/LayoutWithSidebar";
-import { useAuthStore } from "../store/useAuthStore";
-import { useEffect } from "react";
-import ProjectTemplatePage from "../pages/system/ProjectTemplatePage";
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { RoutePath } from '../const/RoutePath';
+import AuthPage from '../pages/AuthPage';
+import PrivateRoute from './PrivateRoute';
+import DashBoardPage from '../pages/DashBoardPage';
+import MainLayout from '../layout/MainLayout';
+import LayoutWithSidebar from '../layout/LayoutWithSidebar';
+import { useAuthStore } from '../store/useAuthStore';
+import { useEffect } from 'react';
+import ProjectTemplatePage from '../pages/system/ProjectTemplatePage';
 
 export default function AppRouter() {
   const hydrate = useAuthStore((s) => s.hydrate);
@@ -30,11 +30,12 @@ export default function AppRouter() {
           <Route
             index
             element={
-              hydrated ? (
-                <Navigate to={RoutePath.DASHBOARD} replace />
-              ) : (
-                <Navigate to={RoutePath.LOGIN} replace />
-              )
+              <Navigate to={RoutePath.DASHBOARD} replace />
+              // hydrated ? (
+              //   <Navigate to={RoutePath.DASHBOARD} replace />
+              // ) : (
+              //   <Navigate to={RoutePath.LOGIN} replace />
+              // )
             }
           />
 
@@ -44,16 +45,17 @@ export default function AppRouter() {
           {/* 사이드바 포함 보호 영역 */}
           <Route
             element={
-              <PrivateRoute>
-                <LayoutWithSidebar />
-              </PrivateRoute>
+              <LayoutWithSidebar />
+              // <PrivateRoute>
+              //   <LayoutWithSidebar />
+              // </PrivateRoute>
             }
           >
             {/* 대시보드 */}
             <Route path={RoutePath.DASHBOARD} element={<DashBoardPage />} />
 
             {/* 시스템 관리 */}
-            <Route path={RoutePath.system_TEMPLATE} element={<ProjectTemplatePage />} />
+            <Route path={RoutePath.SYSTEM_TEMPLATE} element={<ProjectTemplatePage />} />
           </Route>
 
           {/* 보호된 페이지 (로그인 필요) */}

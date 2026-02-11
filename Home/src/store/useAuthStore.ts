@@ -1,8 +1,8 @@
 // src/store/useAuthStore.ts
-import { create } from "zustand";
-import type { LoginResponse } from "../data/response/LoginResponse";
-import { clearUser, loadToken, loadUser, saveUser } from "../utils/AuthStorage";
-import { loginService } from "../service/LoginService";
+import { create } from 'zustand';
+import type { LoginResponse } from '../data/response/LoginResponse';
+import { clearUser, loadToken, loadUser, saveUser } from '../utils/AuthStorage';
+import { loginService } from '../service/LoginService';
 
 interface AuthState {
   user: LoginResponse | null;
@@ -40,7 +40,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     try {
       await loginService.logout();
     } catch (e) {
-      console.warn("logout api failed", e);
+      console.warn('logout api failed', e);
     } finally {
       clearUser();
       set({ user: null, token: null });

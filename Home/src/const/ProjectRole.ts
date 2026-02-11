@@ -1,4 +1,3 @@
-// const/ProjectRole.ts
 export const ProjectRoleLabel = {
   OWNER: "관리자",
   PM: "PM",

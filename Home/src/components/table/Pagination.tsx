@@ -1,4 +1,4 @@
-import styles from "@/scss/base.module.scss";
+import styles from '@/scss/base.module.scss';
 
 export interface PageInfo {
   page: number;
@@ -15,11 +15,7 @@ type PaginationProps = {
 
 const PAGE_SIZES = [10, 20, 50];
 
-const Pagination = ({
-  pageInfo,
-  onChangePage,
-  onChangeSize,
-}: PaginationProps) => {
+const Pagination = ({ pageInfo, onChangePage, onChangeSize }: PaginationProps) => {
   const { page, totalPages, size } = pageInfo;
 
   // 현재 페이지 기준 앞/뒤 4개
@@ -29,10 +25,7 @@ const Pagination = ({
     <div className={styles.pagination_container}>
       <div className={styles.pagination}>
         {/* page size */}
-        <select
-          value={size}
-          onChange={(e) => onChangeSize(Number(e.target.value))}
-        >
+        <select value={size} onChange={(e) => onChangeSize(Number(e.target.value))}>
           {PAGE_SIZES.map((s) => (
             <option key={s} value={s}>
               {s}개씩
@@ -48,21 +41,14 @@ const Pagination = ({
         {/* 페이지 번호 */}
         <div className={styles.page_numbers}>
           {pageNumbers.map((p) => (
-            <button
-              key={p}
-              className={p === page ? styles.active : ""}
-              onClick={() => onChangePage(p)}
-            >
+            <button key={p} className={p === page ? styles.active : ''} onClick={() => onChangePage(p)}>
               {p}
             </button>
           ))}
         </div>
 
         {/* 다음 */}
-        <button
-          disabled={page === totalPages}
-          onClick={() => onChangePage(page + 1)}
-        >
+        <button disabled={page === totalPages} onClick={() => onChangePage(page + 1)}>
           다음
         </button>
       </div>
@@ -70,11 +56,7 @@ const Pagination = ({
   );
 };
 
-const getPageRangeAround = (
-  currentPage: number,
-  totalPages: number,
-  range = 4
-) => {
+const getPageRangeAround = (currentPage: number, totalPages: number, range = 4) => {
   const start = Math.max(1, currentPage - range);
   const end = Math.min(totalPages, currentPage + range);
 
