@@ -66,7 +66,6 @@ export const useSignUpVM = () => {
             if (axios.isAxiosError(e)) {
                 const axiosError = e as AxiosError<ApiResponse<unknown>>;
                 const apiResponse = axiosError.response?.data;
-                console.log(apiResponse);
 
                 if (apiResponse) {
                     const code = apiResponse.code;

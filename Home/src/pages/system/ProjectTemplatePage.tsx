@@ -119,7 +119,7 @@ const ProjectTemplatePage = () => {
         </div>
       </div>
 
-      <TemplatePopup open={popupVM.open} mode={popupVM.mode} onClose={popupVM.close} onSubmit={popupVM.submit} />
+      <TemplatePopup popupVM={popupVM} />
     </div>
   );
 };

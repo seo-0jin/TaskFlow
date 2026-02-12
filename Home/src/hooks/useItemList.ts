@@ -1,39 +1,65 @@
 import { useState } from "react";
-import type { ItemContent } from "../const/IssueStatus";
+import type { BaseItem } from '../const/ItemContent';
 
-export interface ItemListViewModel {
-  items: ItemContent[];
+export interface ItemListViewModel<T extends BaseItem> {
+  items: T[];
 
   reset: () => void;
-  createItem: (defaultColor?: string) => void;
+  createItem: (partial?: Partial<T>) => void;
   removeItem: (id: string) => void;
   updateName: (id: string, name: string) => void;
   updateColor: (id: string, color: string) => void;
   move: (from: number, to: number) => void;
 }
 
-export const useItemList = (initialFactory: () => ItemContent[]): ItemListViewModel => {
-  const [items, setItems] = useState<ItemContent[]>(initialFactory);
+export const useItemList = <T extends BaseItem>(
+  initialFactory: () => T[],
+  createFactory?: () => T
+): ItemListViewModel<T> => {
+
+  const [items, setItems] = useState<T[]>(initialFactory);
 
   const reset = () => setItems(initialFactory());
 
-  const createItem = (defaultColor = "#475569") => {
-    setItems((prev) => [
-      ...prev,
-      { id: crypto.randomUUID(), name: "", color: defaultColor },
-    ]);
+  const createItem = (partial: Partial<T> = {}) => {
+    setItems((prev) => {
+      const maxOrder = prev.reduce((m, x) => Math.max(m, (x as any).order ?? 0), 0);
+
+      const base: any = {
+        id: crypto.randomUUID(),
+        name: "",
+        order: maxOrder + 1,
+        color: "#475569"
+      };
+
+      return [
+        ...prev,
+        {
+          ...base,
+          ...(createFactory ? createFactory() : {}),
+          ...partial,
+        } as T,
+      ];
+    });
   };
+
 
   const removeItem = (id: string) => {
     setItems((prev) => prev.filter((x) => x.id !== id));
   };
 
   const updateName = (id: string, name: string) => {
-    setItems((prev) => prev.map((x) => (x.id === id ? { ...x, name } : x)));
+    setItems((prev) =>
+      prev.map((x) => (x.id === id ? { ...x, name } : x))
+    );
   };
 
   const updateColor = (id: string, color: string) => {
-    setItems((prev) => prev.map((x) => (x.id === id ? { ...x, color } : x)));
+    setItems((prev) =>
+      prev.map((x) =>
+        x.id === id ? ({ ...x, color } as T) : x
+      )
+    );
   };
 
   const move = (from: number, to: number) => {
@@ -45,5 +71,13 @@ export const useItemList = (initialFactory: () => ItemContent[]): ItemListViewMo
     });
   };
 
-  return { items, reset, createItem, removeItem, updateName, updateColor, move };
+  return {
+    items,
+    reset,
+    createItem,
+    removeItem,
+    updateName,
+    updateColor,
+    move,
+  };
 };

@@ -1,4 +1,4 @@
-import type { ItemContent } from "./IssueStatus";
+import type { IssueTypeDef } from './ItemContent';
 
 /**
  * 이슈 타입
@@ -43,7 +43,7 @@ export const IssueTypeLabel: Record<IssueTypeValue, string> = {
 /**
  * 템플릿 생성 시 기본 이슈 타입 프리셋
  */
-export const buildDefaultIssueTypeItems = (): ItemContent[] => [
+export const buildDefaultIssueTypeItems = (): IssueTypeDef[] => [
     { id: crypto.randomUUID(), name: IssueTypeLabel.BUG, color: "#EF4444" },
     { id: crypto.randomUUID(), name: IssueTypeLabel.NOT_BUG, color: "#9CA3AF" },
     { id: crypto.randomUUID(), name: IssueTypeLabel.FEATURE, color: "#3B82F6" },

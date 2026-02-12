@@ -30,12 +30,11 @@ export default function AppRouter() {
           <Route
             index
             element={
-              <Navigate to={RoutePath.DASHBOARD} replace />
-              // hydrated ? (
-              //   <Navigate to={RoutePath.DASHBOARD} replace />
-              // ) : (
-              //   <Navigate to={RoutePath.LOGIN} replace />
-              // )
+              hydrated ? (
+                <Navigate to={RoutePath.DASHBOARD} replace />
+              ) : (
+                <Navigate to={RoutePath.LOGIN} replace />
+              )
             }
           />
 
@@ -45,10 +44,9 @@ export default function AppRouter() {
           {/* 사이드바 포함 보호 영역 */}
           <Route
             element={
-              <LayoutWithSidebar />
-              // <PrivateRoute>
-              //   <LayoutWithSidebar />
-              // </PrivateRoute>
+              <PrivateRoute>
+                <LayoutWithSidebar />
+              </PrivateRoute>
             }
           >
             {/* 대시보드 */}

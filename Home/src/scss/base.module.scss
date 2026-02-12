@@ -349,7 +349,7 @@
   .popbody {
     overflow-y: auto;
     position: relative;
-    max-height: 650px;
+    max-height: 800px;
     padding: 20px 24px 0;
     text-align: left;
     box-sizing: border-box;
@@ -381,7 +381,7 @@
         display: block;
         font-size: 13px;
         color: var(--font-muted);
-        margin-top: 6px;
+        margin: 6px 0;
       }
 
       .form_input,
@@ -449,7 +449,6 @@
         display: flex;
         align-items: center;
         gap: 16px;
-        cursor: move;
         transition: all 0.3s ease;
 
         .item_content {
@@ -458,14 +457,30 @@
           align-items: center;
           gap: 16px;
 
+          .color_dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background-clip: padding-box;
+            box-shadow:
+              0 0 0 1px rgba(255, 255, 255, 0.6),
+              0 0 0 2px rgba(0, 0, 0, 0.15);
+          }
+
           .item_input {
             flex: 1;
-            background: var(--bg-test);
+            background: var(--bg-lightGray);
             border: 1px solid var(--line-default);
             border-radius: 8px;
             padding: 10px 14px;
             font-size: 14px;
             font-family: 'Outfit', sans-serif;
+          }
+
+          .item_input:focus {
+            outline: none;
+            border-color: var(--line-purple-light);
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
           }
 
           .item_color {
@@ -508,44 +523,44 @@
 
       .permission_matrix {
         background: var(--bg-main);
-        border: 1px solid var(--border);
+        border: 1px solid var(--line-default);
         border-radius: 12px;
         overflow: hidden;
 
         .matrix_header {
           display: grid;
-          grid-template-columns: 240px repeat(4, 1fr);
-          background: var(--bg-elevated);
+          grid-template-columns: 240px repeat(5, 1fr);
+          background: var(--bg-purple-light);
           padding: 16px;
           font-weight: 700;
           font-size: 13px;
           text-transform: uppercase;
           letter-spacing: 0.5px;
-          border-bottom: 1px solid var(--border);
+          border-bottom: 1px solid var(--line-default);
         }
 
         .matrix_row {
           display: grid;
-          grid-template-columns: 240px repeat(4, 1fr);
+          grid-template-columns: 240px repeat(5, 1fr);
           padding: 16px;
-          border-bottom: 1px solid var(--border);
+          border-bottom: 1px solid var(--line-default);
           align-items: center;
           transition: background 0.2s ease;
         }
 
         .matrix_row:hover {
-          background: var(--bg-elevated);
+          background: var(--bg-purple-light);
         }
 
         .permission_name {
           font-weight: 600;
-          color: var(--text-primary);
+          color: var(--font-default);
         }
 
         .role_checkbox {
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: start;
         }
 
         .checkbox {
@@ -562,7 +577,6 @@
 
         .checkbox:checked {
           background: var(--line-purple-light);
-          // border-color: var(--primary);
         }
 
         .checkbox:checked::after {

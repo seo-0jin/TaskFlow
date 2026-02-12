@@ -1,9 +1,9 @@
 import type { JSX } from 'react';
-import type { ItemContent } from "../../const/IssueStatus";
 import styles from "@/scss/base.module.scss";
+import type { BaseItem } from '../../const/ItemContent';
 
 type TemplateItemRowProps = {
-  item: ItemContent;
+  item: BaseItem;
   onChangeName?: (id: string, name: string) => void;
   onChangeColor?: (id: string, color: string) => void;
   onDelete?: (id: string) => void;
@@ -18,6 +18,12 @@ const TemplateItemRow = ({
   return (
     <div className={styles.item_list}>
       <div className={styles.item_content}>
+        {item.color && (
+          <span
+            className={styles.color_dot}
+            style={{ backgroundColor: item.color }}
+          />
+        )}
         <input
           type="text"
           className={styles.item_input}
@@ -25,12 +31,13 @@ const TemplateItemRow = ({
           placeholder="상태 이름"
           onChange={(e) => onChangeName?.(item.id, e.target.value)}
         />
-        <input
-          type="color"
-          className={styles.item_color}
-          value={item.color}
-          onChange={(e) => onChangeColor?.(item.id, e.target.value)}
-        />
+        {onChangeColor && (
+          <input
+            type="color"
+            value={item.color ?? "#475569"}
+            onChange={(e) => onChangeColor?.(item.id, e.target.value)}
+          />
+        )}
       </div>
       <button
         type="button"

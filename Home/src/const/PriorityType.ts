@@ -1,4 +1,4 @@
-import type { ItemContent } from './IssueStatus';
+import type { PriorityDef } from './ItemContent';
 
 export const PriorityType = {
     LOW: 'LOW',
@@ -15,12 +15,21 @@ export const PriorityLabel: Record<PriorityValue, string> = {
     EMERGENCY: '긴급',
 };
 
-export const buildDefaultPriorityItems = (): ItemContent[] => [
-    { id: crypto.randomUUID(), name: PriorityLabel.EMERGENCY, color: '#DC2626' },
-    { id: crypto.randomUUID(), name: PriorityLabel.HIGH, color: '#EF4444' },
-    { id: crypto.randomUUID(), name: PriorityLabel.MEDIUM, color: '#F59E0B' },
-    { id: crypto.randomUUID(), name: PriorityLabel.LOW, color: '#10B981' },
+export const buildDefaultPriorityItems = (): PriorityDef[] => {
+    const base = [
+    { name: PriorityLabel.EMERGENCY, color: '#DC2626' },
+    { name: PriorityLabel.HIGH, color: '#EF4444' },
+    { name: PriorityLabel.MEDIUM, color: '#F59E0B' },
+    { name: PriorityLabel.LOW, color: '#10B981' },
 ];
+
+return base.map((x, idx) => ({
+    id: crypto.randomUUID(),
+    name: x.name,
+    color: x.color,
+    order: idx + 1,
+}))
+};
 
 export type PriorityKey = keyof typeof PriorityType;
 export type PriorityValue = (typeof PriorityType)[PriorityKey];
