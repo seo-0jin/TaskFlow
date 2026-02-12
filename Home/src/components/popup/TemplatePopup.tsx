@@ -49,7 +49,7 @@ export const TemplatePopup = ({
           {/* 이슈 상태 */}
           <div className={styles.form_section}>
             <h3 className={styles.section_title}>
-              <span className={styles.section_icon}>📋</span>
+              <span className={styles.section_icon}>📊</span>
               이슈 상태<span className={styles.required}>*</span>
             </h3>
             <div className={styles.item_wrap}>
@@ -97,7 +97,7 @@ export const TemplatePopup = ({
           {/* 우선 순위 */}
           <div className={styles.form_section}>
             <h3 className={styles.section_title}>
-              <span className={styles.section_icon}>📋</span>
+              <span className={styles.section_icon}>⭐</span>
               우선순위<span className={styles.required}>*</span>
             </h3>
             <div className={styles.item_wrap}>
@@ -121,7 +121,7 @@ export const TemplatePopup = ({
           {/* 역할/권한 */}
           <div className={styles.form_section}>
             <h3 className={styles.section_title}>
-              <span className={styles.section_icon}>📋</span>
+              <span className={styles.section_icon}>👥</span>
               역할 & 권한<span className={styles.required}>*</span>
             </h3>
             <span className={styles.form_hint}>각 역할에 부여할 권한을 선택하세요</span>

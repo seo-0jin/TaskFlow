@@ -181,7 +181,7 @@ img {
 @media screen and (min-width: 1024px) {
   .login {
     height: calc(100vh - 80px - 40px);
-    overflow: hidden;
+    // overflow: hidden;
     &__content {
       grid-template-columns: repeat(2, max-content);
       justify-content: center;
