@@ -28,5 +28,8 @@ public class PathConf {
     /**
      * System
      */
-    public static final String CREATE_PROJECT_TEMPLATE = "/create-project-template";
+    public static final String PROJECT_TEMPLATE = "/project-template";
+    public static final String TEMPLATE_LIST = "/list"; // 템플릿 목록
+    public static final String CREATE_TEMPLATE = "/create"; // 템플릿 생성
+    public static final String EDIT_TEMPLATE = "/edit"; // 템플릿 수정
 }

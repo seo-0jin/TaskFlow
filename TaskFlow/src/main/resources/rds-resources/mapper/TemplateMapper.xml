@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="MetaDataMapper">
+<mapper namespace="TemplateMapper">
     <resultMap id="TemplateResultMap"
                type="com.example.TaskFlow.model.response.RoleResponse">
         <result property="roleCode" column="role_code"/>
@@ -12,17 +12,31 @@
 
     <select id="findAllTemplate" resultMap="TemplateResultMap">
         SELECT
-        position_code,
-        name_ko,
-        level,
-        description
-        FROM positions
-        ORDER BY level ASC
+        id,
+        name,
+        description,
+        config_json,
+        created_by,
+        created_at,
+        updated_at
+        FROM project_templates
+        ORDER BY created_by ASC
+    </select>
+
+    <select id="countByTemplate" resultType="boolean">
+        SELECT CASE WHEN EXISTS(
+        SELECT 1 FROM project_templates WHERE name = #{templateName}
+        ) THEN 1 ELSE 0 END
     </select>
 
     <insert id="insertTemplate"
-            parameterType="com.example.TaskFlow.model.request.template.CreateProjectTemplateRequest">
-        INSERT INTO PROJECT_TEMPLATES (id, name, description, config_json, created_by)
-        VALUES (#{id}, #{name}, #{description}, #{configJson}, #{createdBy}
+            parameterType="com.example.TaskFlow.model.response.template.ProjectTemplatesResponse">
+        INSERT INTO project_templates (name, description, config_json, created_by)
+        VALUES (
+            #{name},
+            #{description},
+            #{configJson, typeHandler=com.example.TaskFlow.mybatis.handler.JsonbTypeHandler},
+            #{createdBy}
+        )
     </insert>
 </mapper>

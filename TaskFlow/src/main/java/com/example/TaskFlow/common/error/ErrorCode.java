@@ -12,7 +12,9 @@ public enum ErrorCode {
     USER_NOT_FOUND("4040100001", "User not found."),
     DUPLICATED_LOGIN_ID("4000100001", "Duplicated login ID."),
     DUPLICATED_EMAIL("4000100002", "Duplicated Email."),
+    DUPLICATED_TEMPLATE_NAME("4000100003", "Duplicated Template Name."),
     SIGNUP_FAILED("5000100001", "Signup process failed."),
+    CREATE_TEMPLATE_FAILED("5000100002", "Create Template failed"),
     SUCCESS("2000000000", "Request processed successfully.");
 
 

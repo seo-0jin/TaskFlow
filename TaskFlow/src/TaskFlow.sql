@@ -236,3 +236,13 @@ ALTER TABLE project_templates
 --  ],
 --  "defaultView": { "columns":["status","priority","title","assignee","dueDate"], "sort":"priority_desc" }
 --}
+
+ALTER TABLE project_templates
+  ALTER COLUMN id DROP IDENTITY;
+
+ALTER TABLE project_templates
+  ALTER COLUMN id TYPE uuid
+  USING gen_random_uuid();
+
+ALTER TABLE project_templates
+  ALTER COLUMN id SET DEFAULT gen_random_uuid();
