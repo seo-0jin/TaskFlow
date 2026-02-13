@@ -95,14 +95,13 @@ export const useTemplatePopupVM = (): TemplatePopupViewModel => {
         };
 
         const req = {
-            accountId: user?.loginId,
+            createdBy: user?.loginId,
             name: templateName,
             description: templateDescription,
             configJson,
         }
 
         console.log(req);
-        
 
         setOpen(false);
     };
