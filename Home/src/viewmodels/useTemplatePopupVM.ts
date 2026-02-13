@@ -9,6 +9,7 @@ import { buildDefaultProjectRoles } from '../const/ProjectRole';
 import type { IssueStatusDef, IssueTypeDef, PriorityDef, RoleDef } from '../const/ItemContent';
 import type { TemplateConfig } from '../data/request/template/TemplateConfig';
 import { buildDefaultPermissions, type PermissionCode, type PermissionMap } from '../data/request/template/PermissionCode';
+import { useAuthStore } from '../store/useAuthStore';
 
 export interface TemplatePopupViewModel {
     open: boolean;
@@ -82,6 +83,8 @@ export const useTemplatePopupVM = (): TemplatePopupViewModel => {
         });
     };
 
+    const user = useAuthStore((state) => state.user);
+
     const submit = async () => {
         const configJson: TemplateConfig = {
             issueStatuses: statusList.items,
@@ -92,6 +95,7 @@ export const useTemplatePopupVM = (): TemplatePopupViewModel => {
         };
 
         const req = {
+            accountId: user?.loginId,
             name: templateName,
             description: templateDescription,
             configJson,
