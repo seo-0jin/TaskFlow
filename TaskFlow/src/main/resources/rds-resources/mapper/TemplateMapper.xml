@@ -4,10 +4,14 @@
 
 <mapper namespace="TemplateMapper">
     <resultMap id="TemplateResultMap"
-               type="com.example.TaskFlow.model.response.RoleResponse">
-        <result property="roleCode" column="role_code"/>
-        <result property="nameKo" column="name_ko"/>
+               type="com.example.TaskFlow.model.response.template.ProjectTemplatesResponse">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
         <result property="description" column="description"/>
+        <result property="configJson" column="config_json"/>
+        <result property="createdBy" column="created_by"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
     </resultMap>
 
     <select id="findAllTemplate" resultMap="TemplateResultMap">

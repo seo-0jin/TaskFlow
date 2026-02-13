@@ -2,8 +2,7 @@
 CREATE TABLE roles (
     role_code      VARCHAR(20) PRIMARY KEY,   -- 'ADMIN', 'MANAGER', 'USER' 등
     name_ko        VARCHAR(50) NOT NULL,      -- 관리자, 매니저, 일반사용자
-    description    VARCHAR(255),
-    created_at      TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+    description    VARCHAR(255)
 );
 
 -- 기본 역할 데이터 예시 (INSERT는 필요하면 나중에)
@@ -19,7 +18,6 @@ CREATE TABLE users (
     login_id        VARCHAR(50) NOT NULL UNIQUE,  -- 로그인용 아이디
     password        VARCHAR(255) NOT NULL,        -- 해시된 비밀번호
     name            VARCHAR(50) NOT NULL,         -- 이름
-    email           VARCHAR(255) NOT NULL UNIQUE, -- 이메일
     phone           VARCHAR(20),                  -- 핸드폰 번호
     role_code       VARCHAR(20) NOT NULL,         -- FK -> roles
     status          VARCHAR(20) NOT NULL DEFAULT 'ACTIVE',  -- ACTIVE / INACTIVE
@@ -134,21 +132,11 @@ ALTER TABLE activity_logs
 
 
 -- 8. 유용한 인덱스들 (조회 성능용)
-CREATE INDEX idx_work_requests_project
-    ON work_requests(project_id);
-
-CREATE INDEX idx_work_requests_assignee
-    ON work_requests(assignee_id);
-
-CREATE INDEX idx_work_requests_status
-    ON work_requests(status);
-
-CREATE INDEX idx_work_requests_priority
-    ON work_requests(priority);
-
-CREATE INDEX idx_work_requests_due_date
-    ON work_requests(due_date);
-
+CREATE INDEX idx_tickets_project ON tickets(project_id);
+CREATE INDEX idx_tickets_assignee ON tickets(assignee_id);
+CREATE INDEX idx_tickets_status ON tickets(status);
+CREATE INDEX idx_tickets_priority ON tickets(priority);
+CREATE INDEX idx_tickets_due_date ON tickets(due_date);
 
 CREATE INDEX idx_projects_owner ON projects(owner_id);
 CREATE INDEX idx_activity_logs_user ON activity_logs(user_id);
@@ -171,6 +159,27 @@ VALUES (
     'ACTIVE'
 );
 
+ALTER TABLE roles
+ADD COLUMN created_at TIMESTAMP NOT NULL DEFAULT NOW();
+
+
+CREATE INDEX idx_work_requests_project
+    ON work_requests(project_id);
+
+CREATE INDEX idx_work_requests_assignee
+    ON work_requests(assignee_id);
+
+CREATE INDEX idx_work_requests_status
+    ON work_requests(status);
+
+CREATE INDEX idx_work_requests_priority
+    ON work_requests(priority);
+
+CREATE INDEX idx_work_requests_due_date
+    ON work_requests(due_date);
+
+
+
 CREATE TABLE positions (
     position_code   VARCHAR(20) PRIMARY KEY,   -- 'J1', 'J2', 'J3' ...
     name_ko         VARCHAR(50) NOT NULL,      -- '사원', '대리', '과장' ...
@@ -186,6 +195,8 @@ ALTER TABLE users
     ADD CONSTRAINT fk_users_position
         FOREIGN KEY (position_code) REFERENCES positions(position_code);
 
+
+
 INSERT INTO positions(position_code, name_ko, level, description) VALUES
 ('J1', '사원', 1, '일반 직원'),
 ('J2', '대리', 2, '실무 담당'),
@@ -193,23 +204,16 @@ INSERT INTO positions(position_code, name_ko, level, description) VALUES
 ('J4', '차장', 4, '팀 리드'),
 ('J5', '부장', 5, '부서장');
 
+ALTER TABLE users
+ADD COLUMN email VARCHAR(255);
 
-CREATE TABLE project_roles (
-    role_code VARCHAR(50) PRIMARY KEY,
-    role_name VARCHAR(100) NOT NULL
-);
+UPDATE users
+SET email = login_id || '@taskflow.local'
+WHERE email IS NULL OR email = 'temp@example.com';
 
-INSERT INTO project_roles (role_code, role_name) VALUES
-('OWNER', '프로젝트 관리자'),
-('PM', '프로젝트 매니저'),
-('DEV', '개발자'),
-('QA', '테스터'),
-('MEMBER', '일반 멤버');
 
-ALTER TABLE project_members
-ADD CONSTRAINT fk_project_members_role
-FOREIGN KEY (role_in_project)
-REFERENCES project_roles(role_code);
+ALTER TABLE users
+ALTER COLUMN email SET NOT NULL;
 
 CREATE TABLE project_templates (
   id            BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -225,18 +229,6 @@ ALTER TABLE project_templates
   ADD CONSTRAINT fk_project_templates_created_by
   FOREIGN KEY (created_by) REFERENCES users(id);
 
---config_json 예시
---{
---  "statuses": ["TO_DO","IN_PROGRESS","REVIEW","DONE"],
---  "issueTypes": ["BUG","FEATURE","IMPROVEMENT"],
---  "priorities": ["CRITICAL","HIGH","MEDIUM","LOW"],
---  "projectRoles": [
---    { "roleCode":"PM", "permissions":["PROJECT_EDIT","MEMBER_INVITE","ISSUE_CREATE","ISSUE_UPDATE"] },
---    { "roleCode":"DEV","permissions":["ISSUE_CREATE","ISSUE_UPDATE","COMMENT_WRITE"] }
---  ],
---  "defaultView": { "columns":["status","priority","title","assignee","dueDate"], "sort":"priority_desc" }
---}
-
 ALTER TABLE project_templates
   ALTER COLUMN id DROP IDENTITY;
 
@@ -246,3 +238,39 @@ ALTER TABLE project_templates
 
 ALTER TABLE project_templates
   ALTER COLUMN id SET DEFAULT gen_random_uuid();
+
+
+SELECT column_default, is_nullable, data_type
+FROM information_schema.columns
+WHERE table_name='project_templates' AND column_name='id';
+
+SHOW search_path;
+SELECT current_schema();
+
+SELECT conname, pg_get_constraintdef(oid)
+FROM pg_constraint
+WHERE conrelid = 'project_templates'::regclass;
+
+
+
+
+ALTER TABLE project_templates
+DROP CONSTRAINT fk_project_templates_created_by;
+
+ALTER TABLE project_templates
+ALTER COLUMN created_by TYPE VARCHAR(50)
+USING created_by::VARCHAR;
+
+
+
+ALTER TABLE project_templates
+  ALTER COLUMN id DROP IDENTITY IF EXISTS;
+
+
+ALTER TABLE project_templates
+  ALTER COLUMN id TYPE uuid
+  USING gen_random_uuid();
+
+ALTER TABLE project_templates
+  ALTER COLUMN id SET NOT NULL;
+
